@@ -9,6 +9,7 @@ Please build a single page application to visualize the workout data provided in
 ## User Interface
 - Display the gps path on a Map
 - Display the power output over time on a graph, using time as the X axis
+- Display heartRate, cadence, power, temperature, elevation, distance, speed, positionLat, positionLong
 - When user selects a range of time on the graph, highlight the corresponding range on the map
 - Display the 1, 5, 10, 15, and 20 minute "best" efforts
 
@@ -17,6 +18,9 @@ The purpose of this test is to demonstrate your understanding of JavaScript web 
 
 ## Submission
 Please submit your test as an emailed zip file or link to a private repo or private file sharing system. You can also provide a hosted link or it can run locally.
+
+## Next Steps
+- Transition Maps to Mapbox GL with vector tiles => https://blog.webkid.io/making-maps-with-react/
 
 ## Available Scripts
 
