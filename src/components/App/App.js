@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-// import Map from '../Map/GoogleMap';
-import Map from '../Map/GoogleMap';
+import GoogleMap from '../Map/GoogleMap';
 import './App.css';
 
 const App = () =>
@@ -13,7 +12,7 @@ const App = () =>
       <p className="App-intro">
         To get started, edit <code>src/App.js</code> and save to reload.
       </p>
-      <Map />
+      <GoogleMap />
     </div>
   );
 
