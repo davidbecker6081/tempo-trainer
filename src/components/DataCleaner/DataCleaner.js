@@ -39,28 +39,40 @@ export default class DataCleaner {
       average: 0,
       channelSet,
     };
+    let sampleRange;
+    let totalSample;
+    let millisecs;
+    let currentAverage;
 
     for (let i = 0; i < samples.length - sampleAmount; i++) {
-      let totalSample = 0;
-      const sampleRange = {
+      sampleRange = {
         low: 0,
         high: 0,
       };
-      let average = 0;
+      totalSample = 0;
+      currentAverage = 0;
+      millisecs = 0;
 
       for (let j = 0; j < sampleAmount; j++) {
         const highIndex = (i + sampleAmount) - 1;
         const lowIndex = i;
         const index = i + j;
+        if (i !== 0) {
+          millisecs += samples[index].millisecondOffset - samples[index - 1].millisecondOffset;
+        }
         totalSample += samples[index].values[channelSet];
-        sampleRange.low = Math.round(samples[lowIndex].millisecondOffset / 60000);
-        sampleRange.high = Math.round(samples[highIndex].millisecondOffset / 60000);
+        sampleRange.low = samples[lowIndex].millisecondOffset;
+        sampleRange.high = samples[highIndex].millisecondOffset;
       }
 
-      average = totalSample / sampleAmount;
-      if (average > bestEffort.average) {
-        console.log(bestEffort, average, sampleRange, i);
-        bestEffort.average = average;
+      currentAverage = totalSample / sampleAmount;
+      const isNewAverageLarger = currentAverage > bestEffort.average;
+      const sampleRangeDiff = (sampleRange.high - sampleRange.low) + 1000;
+      const isSampleRangeInTime = sampleRangeDiff / millisecAmount === time;
+      const isSampleRangeEqualToMSAmount = millisecs / millisecAmount === time;
+
+      if (isNewAverageLarger && isSampleRangeEqualToMSAmount && isSampleRangeInTime) {
+        bestEffort.average = currentAverage;
         bestEffort.range = sampleRange;
       }
     }

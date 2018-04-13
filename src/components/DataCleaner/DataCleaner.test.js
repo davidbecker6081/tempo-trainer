@@ -39,11 +39,24 @@ describe('App', () => {
 
   describe('calculateBestEffort', () => {
     describe('Power 1-min', () => {
-      it('should return bestEffort average for power', () => {
-        const bestEffortPower = dataCleaner.calculateBestEffort('power', 1).average;
-        const expectedAverage = 376.31666666666666;
-        expect(bestEffortPower).toEqual(expectedAverage);
+      let bestEffort;
+
+      beforeEach(() => {
+        bestEffort = dataCleaner.calculateBestEffort('power', 1);
       });
-    })
+
+      it('should return bestEffort average for power', () => {
+        const expectedAverage = 376.31666666666666;
+        expect(bestEffort.average).toEqual(expectedAverage);
+      });
+      it('should return bestEffort time range', () => {
+        const expectedRange = {
+          low: 2860000,
+          high: 2919000,
+        };
+        expect(bestEffort.range.high).toEqual(expectedRange.high);
+        expect(bestEffort.range.low).toEqual(expectedRange.low);
+      });
+    });
   });
 });
