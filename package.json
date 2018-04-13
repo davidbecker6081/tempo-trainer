@@ -12,7 +12,6 @@
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
-    "google-map-react": "^0.34.0",
     "google-maps-react": "^2.0.0",
     "normalize.css": "^7.0.0",
     "react": "^16.3.1",

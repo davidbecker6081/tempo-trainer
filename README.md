@@ -19,6 +19,9 @@ The purpose of this test is to demonstrate your understanding of JavaScript web 
 ## Submission
 Please submit your test as an emailed zip file or link to a private repo or private file sharing system. You can also provide a hosted link or it can run locally.
 
+## Next Steps
+- Transition Maps to Mapbox GL with vector tiles => https://blog.webkid.io/making-maps-with-react/
+
 ## Available Scripts
 
 In the project directory, you can run:
