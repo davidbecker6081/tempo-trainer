@@ -10,21 +10,22 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      range: {
-        low: 0,
-        high: 0,
-      },
+      range: [0, 100],
     };
     this.dataHelper = new DataCleaner(workoutData);
-    this.changeRange = this.changeRange.bind(this);
+    this.handleRangeChange = this.handleRangeChange.bind(this);
   }
 
-  changeRange(start, end) {
+  componentWillMount() {
+    this.dataHelper.setMinMax();
     this.setState({
-      range: {
-        low: start,
-        high: end,
-      },
+      range: [this.dataHelper.min, this.dataHelper.max],
+    });
+  }
+
+  handleRangeChange(value) {
+    this.setState({
+      range: value,
     });
   }
 
@@ -35,10 +36,10 @@ class App extends Component {
       <div className="App">
         <MetricsView
           range={range}
-          changeRange={this.changeRange}
+          handleRangeChange={this.handleRangeChange}
           dataHelper={this.dataHelper}
         />
-        <MapView range={range} />
+        <MapView range={range} dataHelper={this.dataHelper} />
       </div>
     );
   }
