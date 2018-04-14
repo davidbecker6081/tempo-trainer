@@ -3,7 +3,6 @@ export default class DataCleaner {
     this.data = data;
     this.channels = data.channelSet;
     this.GPSCoords = this.filterGPSCoords();
-    this.bestEfforts = [];
   }
 
   filterGPSCoords() {
@@ -79,8 +78,15 @@ export default class DataCleaner {
     return bestEffort;
   }
 
-  toggleRangeOfTime(start, end) {
+  changeRangeOfTime(start, end) {
+    const { samples } = this.data;
+    const startMillisec = start * 60000;
+    const endMilliSec = end * 60000;
+    const rangeArray = samples.filter(sample =>
+      sample.millisecondOffset >= startMillisec
+      && sample.millisecondOffset <= endMilliSec);
 
+    return rangeArray;
   }
 
   calculateAverage(channelSet) {

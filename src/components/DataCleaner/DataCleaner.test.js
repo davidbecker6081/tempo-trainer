@@ -14,12 +14,15 @@ describe('App', () => {
   it('exists', () => {
     expect(dataCleaner.data).toBeDefined();
   });
+
   describe('Constructor', () => {
     it('should have a GPSCoords', () => {
       expect(dataCleaner.GPSCoords).toBeDefined();
     });
-    it('should default bestEffots to an empty array', () => {
-      expect(dataCleaner.bestEfforts).toHaveLength(0);
+    it('should have all channelSets', () => {
+      const expectedLength = workoutData.channelSet.length;
+      const length = dataCleaner.channels.length;
+      expect(length).toEqual(expectedLength);
     });
   });
 
@@ -182,6 +185,31 @@ describe('App', () => {
         const expetectedChannel = 'power';
         expect(bestEffort.channelSet).toEqual(expetectedChannel);
       });
+    });
+  });
+  describe('changeRangeOfTime', () => {
+    it('should return an array with correct range of time', () => {
+      const correctRange = {
+        start: 3,
+        end: 4,
+      };
+      const rangeArray = dataCleaner.changeRangeOfTime(3, 4);
+      const lastIndex = rangeArray.length - 1;
+      const startTime = rangeArray[0].millisecondOffset / 60000;
+      const endTime = rangeArray[lastIndex].millisecondOffset / 60000;
+
+      expect(startTime).toEqual(correctRange.start);
+      expect(endTime).toEqual(correctRange.end);
+    });
+    it('should return an empty array if start is greater than end', () => {
+      const rangeArray = dataCleaner.changeRangeOfTime(2, 1);
+      expect(rangeArray.length).toEqual(0);
+    });
+    it('should not change the original data', () => {
+      const dataLength = dataCleaner.data.samples.length;
+      const rangeArray = dataCleaner.changeRangeOfTime(1, 2);
+      const dataLengthCheck = dataCleaner.data.samples.length;
+      expect(dataLengthCheck).toBeGreaterThan(rangeArray.length);
     });
   });
 });
