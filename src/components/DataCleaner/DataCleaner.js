@@ -5,6 +5,7 @@ export default class DataCleaner {
     this.GPSCoords = this.filterGPSCoords();
     this.min = 0;
     this.max = 0;
+    this.filteredData = [];
   }
 
   filterGPSCoords() {
@@ -126,5 +127,17 @@ export default class DataCleaner {
 
     this.min = startMinute;
     this.max = endMinute;
+  }
+
+  filterDataForGraph(channelSet) {
+    const { samples } = this.data;
+
+    return samples.reduce((filteredArray, sample) => {
+      const graphObj = { time: 0, [channelSet]: 0 };
+      graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
+      graphObj[channelSet] = sample.values[channelSet] || 0;
+      filteredArray.push(graphObj);
+      return filteredArray;
+    }, []);
   }
 }
