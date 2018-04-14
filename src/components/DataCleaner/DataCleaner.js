@@ -89,11 +89,15 @@ export default class DataCleaner {
     return rangeArray;
   }
 
-  calculateAverage(channelSet) {
-
+  calculateAverage(channelSet, rangeData = this.data.samples) {
+    const totalOfChannel = rangeData.reduce((total, sample) => {
+      total += sample.values[channelSet] || 0;
+      return total;
+    }, 0);
+    return totalOfChannel / rangeData.length;
   }
 
-  calculateTotalTime(channelSet) {
+  calculateTotals(channelSet) {
 
   }
 }

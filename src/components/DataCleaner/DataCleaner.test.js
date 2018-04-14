@@ -212,4 +212,21 @@ describe('App', () => {
       expect(dataLengthCheck).toBeGreaterThan(rangeArray.length);
     });
   });
+  describe('calculate Average', () => {
+    describe('data provided', () => {
+      it('should calculate the correct average for a channel', () => {
+        const expectedAveragePower = 191.16883116883116;
+        const rangeData = dataCleaner.changeRangeOfTime(1, 10);
+        const averagePower = dataCleaner.calculateAverage('power', rangeData);
+        expect(averagePower).toEqual(expectedAveragePower);
+      });
+    });
+    describe('data not provided', () => {
+      it('should calculate the correct average for a channel', () => {
+        const expectedAveragePower = 172.8601356743815;
+        const averagePower = dataCleaner.calculateAverage('power');
+        expect(averagePower).toEqual(expectedAveragePower);
+      });
+    });
+  });
 });

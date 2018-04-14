@@ -22,6 +22,11 @@ Please submit your test as an emailed zip file or link to a private repo or priv
 ## Next Steps
 - Transition Maps to Mapbox GL with vector tiles => https://blog.webkid.io/making-maps-with-react/
 
+## Additional Features
+- Averages
+- Totals
+- Potential Pages
+
 ## Available Scripts
 
 In the project directory, you can run:
