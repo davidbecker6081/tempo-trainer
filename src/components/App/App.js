@@ -39,7 +39,10 @@ class App extends Component {
           handleRangeChange={this.handleRangeChange}
           dataHelper={this.dataHelper}
         />
-        <MapView range={range} dataHelper={this.dataHelper} />
+        <MapView
+          range={range}
+          dataHelper={this.dataHelper}
+        />
       </div>
     );
   }
