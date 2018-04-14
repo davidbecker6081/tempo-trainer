@@ -96,5 +96,34 @@ describe('App', () => {
         expect(bestEffort.channelSet).toEqual(expetectedChannel);
       });
     });
+    describe('Power 10-min', () => {
+      let bestEffort;
+
+      beforeEach(() => {
+        bestEffort = dataCleaner.calculateBestEffort('power', 10);
+      });
+
+      it('should return bestEffort average for power', () => {
+        const expectedAverage = 254.635;
+        expect(bestEffort.average).toEqual(expectedAverage);
+      });
+      it('should return bestEffort time range', () => {
+        const expectedRange = {
+          low: 1249000,
+          high: 1848000,
+        };
+        expect(bestEffort.range.high).toEqual(expectedRange.high);
+        expect(bestEffort.range.low).toEqual(expectedRange.low);
+      });
+      it('should return an expected range equal to given duration of time', () => {
+        const duration = (bestEffort.range.high - bestEffort.range.low) + 1000;
+        const expectedDuration = 10 * 60000;
+        expect(duration).toEqual(expectedDuration);
+      });
+      it('should return bestEffort with correct channelSet', () => {
+        const expetectedChannel = 'power';
+        expect(bestEffort.channelSet).toEqual(expetectedChannel);
+      });
+    });
   });
 });
