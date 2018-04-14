@@ -110,4 +110,8 @@ export default class DataCleaner {
       return total;
     }, 0);
   }
+
+  convertMilliToMin(num) {
+    return num / 60000;
+  }
 }

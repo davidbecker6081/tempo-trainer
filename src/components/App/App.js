@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import MapView from '../../views/MapView/MapView';
 import MetricsView from '../../views/MetricsView/MetricsView';
+import DataCleaner from '../DataCleaner/DataCleaner';
+import workoutData from '../../__mock__/workout-data.json';
 import './App.css';
 
 class App extends Component {
@@ -13,6 +15,7 @@ class App extends Component {
         high: 0,
       },
     };
+    this.dataHelper = new DataCleaner(workoutData);
     this.changeRange = this.changeRange.bind(this);
   }
 
@@ -30,7 +33,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <MetricsView range={range} changeRange={this.changeRange} />
+        <MetricsView
+          range={range}
+          changeRange={this.changeRange}
+          dataHelper={this.dataHelper}
+        />
         <MapView range={range} />
       </div>
     );
