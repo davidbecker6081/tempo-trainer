@@ -229,4 +229,32 @@ describe('App', () => {
       });
     });
   });
+  describe('calculate total', () => {
+    describe('data provided', () => {
+      it('should calculate the correct total for a channel of millisecondOffset', () => {
+        const expectedTotalTime = 178125000;
+        const rangeData = dataCleaner.changeRangeOfTime(1, 10);
+        const totalTime = dataCleaner.calculateTotal('millisecondOffset', rangeData);
+        expect(totalTime).toEqual(expectedTotalTime);
+      });
+      it('should calculate the correct total for a channel not millisecondOffset', () => {
+        const expectedTotalDistance = 1721330.789999999;
+        const rangeData = dataCleaner.changeRangeOfTime(1, 10);
+        const totalDistance = dataCleaner.calculateTotal('distance', rangeData);
+        expect(totalDistance).toEqual(expectedTotalDistance);
+      });
+    });
+    describe('data not provided', () => {
+      it('should calculate the correct total for a channel of millisecondOffset', () => {
+        const expectedTotalTime = 12572045999;
+        const totalTime = dataCleaner.calculateTotal('millisecondOffset');
+        expect(totalTime).toEqual(expectedTotalTime);
+      });
+      it('should calculate the correct total for a channel not millisecondOffset', () => {
+        const expectedTotalDistance = 108960059.90000005;
+        const totalDistance = dataCleaner.calculateTotal('distance');
+        expect(totalDistance).toEqual(expectedTotalDistance);
+      });
+    });
+  });
 });

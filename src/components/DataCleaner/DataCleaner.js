@@ -97,7 +97,17 @@ export default class DataCleaner {
     return totalOfChannel / rangeData.length;
   }
 
-  calculateTotals(channelSet) {
+  calculateTotal(channelSet, rangeData = this.data.samples) {
+    if (channelSet === 'millisecondOffset') {
+      return rangeData.reduce((total, sample) => {
+        total += sample[channelSet] || 0;
+        return total;
+      }, 0);
+    }
 
+    return rangeData.reduce((total, sample) => {
+      total += sample.values[channelSet] || 0;
+      return total;
+    }, 0);
   }
 }
