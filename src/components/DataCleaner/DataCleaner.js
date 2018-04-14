@@ -50,8 +50,8 @@ export default class DataCleaner {
         high: 0,
       };
       totalSample = 0;
-      currentAverage = 0;
       millisecs = 0;
+      currentAverage = 0;
 
       for (let j = 0; j < sampleAmount; j++) {
         const highIndex = (i + sampleAmount) - 1;
@@ -60,7 +60,7 @@ export default class DataCleaner {
         if (i !== 0) {
           millisecs += samples[index].millisecondOffset - samples[index - 1].millisecondOffset;
         }
-        totalSample += samples[index].values[channelSet];
+        totalSample += samples[index].values[channelSet] || 0;
         sampleRange.low = samples[lowIndex].millisecondOffset;
         sampleRange.high = samples[highIndex].millisecondOffset;
       }
@@ -68,15 +68,14 @@ export default class DataCleaner {
       currentAverage = totalSample / sampleAmount;
       const isNewAverageLarger = currentAverage > bestEffort.average;
       const sampleRangeDiff = (sampleRange.high - sampleRange.low) + 1000;
-      const isSampleRangeInTime = sampleRangeDiff / millisecAmount === time;
-      const isSampleRangeEqualToMSAmount = millisecs / millisecAmount === time;
+      const isSampleRangeInTime = sampleRangeDiff / millisecAmount === 1;
+      const isSampleRangeEqualToMSAmount = millisecs / millisecAmount === 1;
 
       if (isNewAverageLarger && isSampleRangeEqualToMSAmount && isSampleRangeInTime) {
         bestEffort.average = currentAverage;
         bestEffort.range = sampleRange;
       }
     }
-
     return bestEffort;
   }
 
