@@ -11,15 +11,23 @@ class App extends Component {
     super();
     this.state = {
       range: [0, 100],
+      channelSet: 'power',
     };
     this.dataHelper = new DataCleaner(workoutData);
     this.handleRangeChange = this.handleRangeChange.bind(this);
+    this.handleChannelChange = this.handleChannelChange.bind(this);
   }
 
   componentWillMount() {
     this.dataHelper.setMinMax();
     this.setState({
       range: [this.dataHelper.min, this.dataHelper.max],
+    });
+  }
+
+  handleChannelChange(channel) {
+    this.setState({
+      channelSet: channel,
     });
   }
 
@@ -30,7 +38,7 @@ class App extends Component {
   }
 
   render() {
-    const { range } = this.state;
+    const { range, channelSet } = this.state;
 
     return (
       <div className="App">
@@ -38,6 +46,8 @@ class App extends Component {
           range={range}
           handleRangeChange={this.handleRangeChange}
           dataHelper={this.dataHelper}
+          channelSet={channelSet}
+          handleChannelChange={this.handleChannelChange}
         />
         <MapView
           range={range}
