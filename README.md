@@ -27,6 +27,9 @@ Please submit your test as an emailed zip file or link to a private repo or priv
 - Totals
 - Potential Pages
 
+## Features Used:
+- rc-slider (inefficient to have to input type=range elements and do some wacky css styling with absolute positioning)
+
 ## Available Scripts
 
 In the project directory, you can run:

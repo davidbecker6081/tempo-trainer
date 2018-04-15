@@ -1,13 +1,51 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import MapView from '../../views/MapView/MapView';
+import MetricsView from '../../views/MetricsView/MetricsView';
+import DataCleaner from '../DataCleaner/DataCleaner';
+import workoutData from '../../__mock__/workout-data.json';
 import './App.css';
 
-const App = () =>
-  (
-    <div className="App">
-      <MapView />
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      range: [0, 100],
+    };
+    this.dataHelper = new DataCleaner(workoutData);
+    this.handleRangeChange = this.handleRangeChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.dataHelper.setMinMax();
+    this.setState({
+      range: [this.dataHelper.min, this.dataHelper.max],
+    });
+  }
+
+  handleRangeChange(value) {
+    this.setState({
+      range: value,
+    });
+  }
+
+  render() {
+    const { range } = this.state;
+
+    return (
+      <div className="App">
+        <MetricsView
+          range={range}
+          handleRangeChange={this.handleRangeChange}
+          dataHelper={this.dataHelper}
+        />
+        <MapView
+          range={range}
+          dataHelper={this.dataHelper}
+        />
+      </div>
+    );
+  }
+}
 
 export default App;

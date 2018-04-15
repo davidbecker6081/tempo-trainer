@@ -3,6 +3,9 @@ export default class DataCleaner {
     this.data = data;
     this.channels = data.channelSet;
     this.GPSCoords = this.filterGPSCoords();
+    this.min = 0;
+    this.max = 0;
+    this.filteredData = [];
   }
 
   filterGPSCoords() {
@@ -109,5 +112,32 @@ export default class DataCleaner {
       total += sample.values[channelSet] || 0;
       return total;
     }, 0);
+  }
+
+  convertMilliToMin(num) {
+    return num / 60000;
+  }
+
+  setMinMax() {
+    const { samples } = this.data;
+    const startTime = samples[0].millisecondOffset;
+    const endTime = samples[samples.length - 1].millisecondOffset;
+    const startMinute = Math.round(this.convertMilliToMin(startTime));
+    const endMinute = Math.round(this.convertMilliToMin(endTime));
+
+    this.min = startMinute;
+    this.max = endMinute;
+  }
+
+  filterDataForGraph(channelSet) {
+    const { samples } = this.data;
+
+    return samples.reduce((filteredArray, sample, i) => {
+      const graphObj = { time: 0, [channelSet]: 0 };
+      graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
+      graphObj[channelSet] = sample.values[channelSet] || 0;
+      filteredArray.push(graphObj);
+      return filteredArray;
+    }, []);
   }
 }
