@@ -8,12 +8,12 @@ const BestEffort = ({
   timeRange,
 }) =>
   (
-    <div>
+    <article>
       <p>Best <span>{timeForCalc}</span> Average</p>
       <p>{channelSet}</p>
       <p>{effort}</p>
       <p>{timeRange.low} to {timeRange.high}</p>
-    </div>
+    </article>
   );
 
 export default BestEffort;
