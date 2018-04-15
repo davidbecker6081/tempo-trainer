@@ -16,32 +16,32 @@ const BestEffortsView = ({ channelSet, dataHelper }) => {
       <BestEffort
         channelSet={channelSet}
         timeForCalc={1}
-        timeRange={effort['1'].range}
-        effort={effort['1'].average}
+        timeRange={efforts['1'].range}
+        effort={efforts['1'].average}
       />
       <BestEffort
         channelSet={channelSet}
         timeForCalc={5}
-        timeRange={effort['5'].range}
-        effort={effort['5'].average}
+        timeRange={efforts['5'].range}
+        effort={efforts['5'].average}
       />
       <BestEffort
         channelSet={channelSet}
         timeForCalc={10}
-        timeRange={effort['10'].range}
-        effort={effort['10'].average}
+        timeRange={efforts['10'].range}
+        effort={efforts['10'].average}
       />
       <BestEffort
         channelSet={channelSet}
         timeForCalc={15}
-        timeRange={effort['15'].range}
-        effort={effort['15'].average}
+        timeRange={efforts['15'].range}
+        effort={efforts['15'].average}
       />
       <BestEffort
         channelSet={channelSet}
         timeForCalc={20}
-        timeRange={effort['20'].range}
-        effort={effort['20'].average}
+        timeRange={efforts['20'].range}
+        effort={efforts['20'].average}
       />
     </section>
   );
