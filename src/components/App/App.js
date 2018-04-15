@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MapView from '../../views/MapView/MapView';
 import MetricsView from '../../views/MetricsView/MetricsView';
+import BestEffortsView from '../../views/BestEffortsView/BestEffortsView';
 import DataCleaner from '../DataCleaner/DataCleaner';
 import workoutData from '../../__mock__/workout-data.json';
 import './App.css';
@@ -53,6 +54,10 @@ class App extends Component {
           range={range}
           dataHelper={this.dataHelper}
           originalRange={originalRange}
+        />
+        <BestEffortsView
+          dataHelper={this.dataHelper}
+          channelSet={channelSet}
         />
       </div>
     );

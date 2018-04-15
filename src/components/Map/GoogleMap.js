@@ -7,7 +7,6 @@ export class GoogleMap extends Component {
     if (nextProps.range === prevState.range) {
       return null;
     }
-    console.log('derive', nextProps.range, prevState.range, nextProps.originalRange)
     return {
       range: nextProps.range,
     };
@@ -32,7 +31,6 @@ export class GoogleMap extends Component {
   }
 
   render() {
-    console.log('re-render')
     const { dataHelper, originalRange } = this.props;
     const { range } = this.state;
     const style = { height: '50%', width: '50%' };
