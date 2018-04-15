@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import React from 'react';
 import MetricTabs from '../../components/MetricTabs/MetricTabs';
 import Graph from '../../components/Graph/Graph';
 import RangeSlider from '../../components/RangeSlider/RangeSlider';

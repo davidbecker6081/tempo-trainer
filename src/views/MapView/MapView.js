@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GoogleApiWrapper from '../../components/Map/GoogleMap';
 
-const MapView = ({ range, dataHelper }) =>
+const MapView = ({ range, dataHelper, originalRange }) =>
   (
     <div>
-      <GoogleApiWrapper range={range} dataHelper={dataHelper} />
+      <GoogleApiWrapper range={range} dataHelper={dataHelper} originalRange={originalRange} />
     </div>
   );
 
