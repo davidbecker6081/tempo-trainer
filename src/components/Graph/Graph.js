@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryArea, VictoryTheme, VictoryAxis, VictoryLabel, VictoryBar } from 'victory';
+import { VictoryChart, VictoryArea, VictoryTheme } from 'victory';
 import './Graph.css';
 
 const Graph = ({ dataHelper, range, channelSet }) => {

@@ -11,6 +11,14 @@ class MetricsView extends Component {
     this.state = {
       channelSet: 'power',
     };
+    this.handleChannelChange = this.handleChannelChange.bind(this);
+  }
+
+  handleChannelChange(channel) {
+    console.log(channel);
+    this.setState({
+      channelSet: channel,
+    });
   }
 
   render() {
@@ -19,7 +27,7 @@ class MetricsView extends Component {
 
     return (
       <div>
-        <MetricTabs />
+        <MetricTabs handleChannelChange={this.handleChannelChange} />
         <Graph range={range} dataHelper={dataHelper} channelSet={channelSet} />
         <RangeSlider range={range} handleRangeChange={handleRangeChange} dataHelper={dataHelper} />
       </div>
