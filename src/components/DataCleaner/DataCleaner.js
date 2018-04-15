@@ -2,16 +2,13 @@ export default class DataCleaner {
   constructor(data) {
     this.data = data;
     this.channels = data.channelSet;
-    this.GPSCoords = this.filterGPSCoords();
+    this.GPSCoords = this.filterGPSCoords(this.data.samples);
     this.min = 0;
     this.max = 0;
-    this.filteredData = [];
   }
 
-  filterGPSCoords() {
-    const { samples } = this.data;
-
-    const GPSCoords = samples.reduce((coords, sample) => {
+  filterGPSCoords(rangeData) {
+    const GPSCoords = rangeData.reduce((coords, sample) => {
       const { positionLat: lat, positionLong: lng } = sample.values;
 
       if (lat && lng) {
@@ -129,14 +126,31 @@ export default class DataCleaner {
     this.max = endMinute;
   }
 
-  filterDataForGraph(channelSet) {
+  filterDataForGraph(channelSet, range) {
     const { samples } = this.data;
 
     return samples.reduce((filteredArray, sample, i) => {
-      const graphObj = { time: 0, [channelSet]: 0 };
-      graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
-      graphObj[channelSet] = sample.values[channelSet] || 0;
-      filteredArray.push(graphObj);
+      const currentTime = this.convertMilliToMin(sample.millisecondOffset);
+      const isCurrentInRange = currentTime >= range[0] && currentTime <= range[1];
+      if (isCurrentInRange) {
+        const graphObj = { time: 0, [channelSet]: 0 };
+        graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
+        graphObj[channelSet] = sample.values[channelSet] || 0;
+        filteredArray.push(graphObj);
+      }
+      return filteredArray;
+    }, []);
+  }
+
+  filterDataForMap(range) {
+    const { samples } = this.data;
+
+    return samples.reduce((filteredArray, sample, i) => {
+      const currentTime = this.convertMilliToMin(sample.millisecondOffset);
+      const isCurrentInRange = currentTime >= range[0] && currentTime <= range[1];
+      if (isCurrentInRange) {
+        filteredArray.push(sample);
+      }
       return filteredArray;
     }, []);
   }

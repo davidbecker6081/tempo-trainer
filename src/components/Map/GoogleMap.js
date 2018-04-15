@@ -4,65 +4,79 @@ import API_KEYS from '../../api-keys';
 
 export class GoogleMap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.range === prevState.timeRange) {
+    if (nextProps.range === prevState.range) {
       return null;
     }
+    console.log('derive', nextProps.range, prevState.range, nextProps.originalRange)
     return {
-      timeRange: {
-        low: nextProps.range.low,
-        high: nextProps.range.high,
-      },
+      range: nextProps.range,
     };
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      timeRange: {
-        low: props.range.low,
-        high: props.range.high,
-      },
+      range: props.range,
     };
   }
 
+  createHighlightPolyline(coords) {
+    return (
+      <Polyline
+        path={coords}
+        strokeColor="#00FFBB"
+        strokeOpacity={0.5}
+        strokeWeight={2}
+      />
+    );
+  }
 
   render() {
-    const { timeRange } = this.state;
+    console.log('re-render')
+    const { dataHelper, originalRange } = this.props;
+    const { range } = this.state;
     const style = { height: '50%', width: '50%' };
-    const coords = [
-      { lat: 40.86, lng: -88.082 },
-      { lat: 40.86, lng: -88.084 },
-      { lat: 40.84, lng: -88.086 },
-      { lat: 40.84, lng: -88.088 },
-    ];
+    const filteredRangeData = dataHelper.filterDataForMap(range);
+    const GPSCoords = dataHelper.filterGPSCoords(filteredRangeData);
+    const filteredOriginalRange = dataHelper.filterDataForMap(originalRange);
+    const originalCoords = dataHelper.filterGPSCoords(filteredOriginalRange);
+    const startMarker = {
+      lat: GPSCoords[0].lat,
+      lng: GPSCoords[0].lng,
+    };
+    const finishMarker = {
+      lat: GPSCoords[GPSCoords.length - 1].lat,
+      lng: GPSCoords[GPSCoords.length - 1].lng,
+    };
 
     return (
       <Map
         google={this.props.google}
         onReady={() => console.log('ready')}
-        zoom={14}
+        zoom={12}
         style={style}
         initialCenter={{
-            lat: 40.854885,
-            lng: -88.081807,
+            lat: startMarker.lat,
+            lng: startMarker.lng,
         }}
       >
 
         <Marker
           onClick={this.onMarkerClick}
           name="Current location"
-          position={{ lat: 40.86, lng: -88.082 }}
+          position={{ lat: startMarker.lat, lng: startMarker.lng }}
         />
         <Polyline
-          path={coords}
+          path={originalCoords}
           strokeColor="#0000FF"
           strokeOpacity={0.8}
           strokeWeight={2}
         />
+        {this.createHighlightPolyline(GPSCoords)}
         <Marker
           onClick={this.onMarkerClick}
           name="Past location"
-          position={{ lat: 40.84, lng: -88.088 }}
+          position={{ lat: finishMarker.lat, lng: finishMarker.lng }}
         />
       </Map>
     );

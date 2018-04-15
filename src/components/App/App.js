@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
 import MapView from '../../views/MapView/MapView';
 import MetricsView from '../../views/MetricsView/MetricsView';
 import DataCleaner from '../DataCleaner/DataCleaner';
@@ -12,6 +11,7 @@ class App extends Component {
     this.state = {
       range: [0, 100],
       channelSet: 'power',
+      originalRange: [0, 86],
     };
     this.dataHelper = new DataCleaner(workoutData);
     this.handleRangeChange = this.handleRangeChange.bind(this);
@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   render() {
-    const { range, channelSet } = this.state;
+    const { range, channelSet, originalRange } = this.state;
 
     return (
       <div className="App">
@@ -52,6 +52,7 @@ class App extends Component {
         <MapView
           range={range}
           dataHelper={this.dataHelper}
+          originalRange={originalRange}
         />
       </div>
     );
