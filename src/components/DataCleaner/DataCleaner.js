@@ -132,7 +132,7 @@ export default class DataCleaner {
   filterDataForGraph(channelSet) {
     const { samples } = this.data;
 
-    return samples.reduce((filteredArray, sample) => {
+    return samples.reduce((filteredArray, sample, i) => {
       const graphObj = { time: 0, [channelSet]: 0 };
       graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
       graphObj[channelSet] = sample.values[channelSet] || 0;
