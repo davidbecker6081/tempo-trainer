@@ -115,6 +115,17 @@ export default class DataCleaner {
     return num / 60000;
   }
 
+  calculateTotalElevationGain() {
+    const { samples } = this.data;
+    return samples.reduce((gain, sample, i) => {
+      if (i < samples.length - 1) {
+        const difference = samples[i + 1].values.elevation - sample.values.elevation;
+        gain += difference || 0;
+      }
+      return gain;
+    }, samples[0].values.elevation);
+  }
+
   setMinMax() {
     const { samples } = this.data;
     const startTime = samples[0].millisecondOffset;
