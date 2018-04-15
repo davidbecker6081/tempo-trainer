@@ -129,14 +129,18 @@ export default class DataCleaner {
     this.max = endMinute;
   }
 
-  filterDataForGraph(channelSet) {
+  filterDataForGraph(channelSet, range) {
     const { samples } = this.data;
 
     return samples.reduce((filteredArray, sample, i) => {
-      const graphObj = { time: 0, [channelSet]: 0 };
-      graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
-      graphObj[channelSet] = sample.values[channelSet] || 0;
-      filteredArray.push(graphObj);
+      const currentTime = this.convertMilliToMin(sample.millisecondOffset);
+      const isCurrentInRange = currentTime >= range[0] && currentTime <= range[1];
+      if (isCurrentInRange) {
+        const graphObj = { time: 0, [channelSet]: 0 };
+        graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
+        graphObj[channelSet] = sample.values[channelSet] || 0;
+        filteredArray.push(graphObj);
+      }
       return filteredArray;
     }, []);
   }

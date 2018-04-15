@@ -3,7 +3,7 @@ import { VictoryChart, VictoryArea, VictoryTheme } from 'victory';
 import './Graph.css';
 
 const Graph = ({ dataHelper, range, channelSet }) => {
-  const data = dataHelper.filterDataForGraph(channelSet);
+  const data = dataHelper.filterDataForGraph(channelSet, range);
   // const tickValues = data.filter(point => range[range.length - 1] / 10;
   return (
     <div>
