@@ -26,11 +26,11 @@ export default class DataCleaner {
   }
 
   averageOfSet(sampleSet, channelSet) {
-    const sum = samples.reduce((sum, sample, i) => {
+    const sum = sampleSet.reduce((sum, sample, i) => {
       sum += sample.values[channelSet];
       return sum;
     }, 0);
-    const average = sum / samples.length;
+    const average = sum / sampleSet.length;
     return average;
   }
 
@@ -40,11 +40,12 @@ export default class DataCleaner {
   }
 
   createChunkSet(chunkSize) {
+    const { samples } = this.data;
     const chunkSet = [];
     let j = 0;
 
     for (let i = 0; i < samples.length; i++, j++) {
-      const chunk = createChunk(chunkSize, j);
+      const chunk = this.createChunk(chunkSize, j);
       if (chunk.length === chunkSize) {
         chunkSet.push(chunk);
       }
@@ -52,56 +53,33 @@ export default class DataCleaner {
     return chunkSet;
   }
 
-  calculateBestEffort(channelSet, time) {
-    // "Best" is defined as highest continuous average for the given time period.
-    const { samples } = this.data;
-    const millisecAmount = time * 60000;
-    const sampleAmount = time * 60;
-    const bestEffort = {
-      range: {
-        low: 0,
-        high: 0,
-      },
+  createMockEffort(channelSet) {
+    return {
       average: 0,
+      range: {
+        high: 0,
+        low: 0,
+      },
       channelSet,
     };
-    let sampleRange;
-    let totalSample;
-    let millisecs;
-    let currentAverage;
+  }
 
-    for (let i = 0; i < samples.length - sampleAmount; i++) {
-      sampleRange = {
-        low: 0,
-        high: 0,
-      };
-      totalSample = 0;
-      millisecs = 0;
-      currentAverage = 0;
-
-      for (let j = 0; j < sampleAmount; j++) {
-        const highIndex = (i + sampleAmount) - 1;
-        const lowIndex = i;
-        const index = i + j;
-        if (i !== 0) {
-          millisecs += samples[index].millisecondOffset - samples[index - 1].millisecondOffset;
-        }
-        totalSample += samples[index].values[channelSet] || 0;
-        sampleRange.low = samples[lowIndex].millisecondOffset;
-        sampleRange.high = samples[highIndex].millisecondOffset;
+  calculateBestEffort(channelSet, time) {
+    // "Best" is defined as highest continuous average for the given time period.
+    // Using a chunked array
+    const chunkSize = time * 60;
+    const chunkSet = this.createChunkSet(chunkSize);
+    const mockEffort = this.createMockEffort(channelSet);
+    let currentAverage = 0;
+    const bestEffort = chunkSet.reduce((effort, chunk) => {
+      currentAverage = this.averageOfSet(chunk, channelSet);
+      if (currentAverage > mockEffort.average) {
+        mockEffort.average = currentAverage;
+        mockEffort.range.low = chunk[0].millisecondOffset;
+        mockEffort.range.high = chunk[chunk.length - 1].millisecondOffset;
       }
-
-      currentAverage = totalSample / sampleAmount;
-      const isNewAverageLarger = currentAverage > bestEffort.average;
-      const sampleRangeDiff = (sampleRange.high - sampleRange.low) + 1000;
-      const isSampleRangeInTime = sampleRangeDiff / millisecAmount === 1;
-      const isSampleRangeEqualToMSAmount = millisecs / millisecAmount === 1;
-
-      if (isNewAverageLarger && isSampleRangeEqualToMSAmount && isSampleRangeInTime) {
-        bestEffort.average = currentAverage;
-        bestEffort.range = sampleRange;
-      }
-    }
+      return effort;
+    }, mockEffort);
     return bestEffort;
   }
 
