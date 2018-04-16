@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Avatar.css';
 
 const Avatar = ({ user }) => {
@@ -14,3 +15,10 @@ const Avatar = ({ user }) => {
 };
 
 export default Avatar;
+
+Avatar.propTypes = {
+  user: Proptypes.shape({
+    name: PropTypes.string.isRequired,
+    profileImg: PropTypes.string.isRequired,
+  }).isRequired,
+};

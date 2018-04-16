@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Total from '../../components/Total/Total';
 import './TotalsView.css';
 
@@ -12,3 +13,13 @@ const TotalsView = ({ dataHelper }) =>
   );
 
 export default TotalsView;
+
+TotalsView.propTypes = {
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+};

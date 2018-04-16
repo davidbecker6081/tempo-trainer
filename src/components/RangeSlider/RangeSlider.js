@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './RangeSlider.css';
@@ -44,3 +45,15 @@ class RangeSlider extends Component {
 }
 
 export default RangeSlider;
+
+RangeSlider.propTypes = {
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+  handleRangeChange: PropTypes.func.isRequired,
+  range: PropTypes.shape([]).isRequired,
+};

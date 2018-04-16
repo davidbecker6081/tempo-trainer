@@ -1,5 +1,6 @@
 import React from 'react';
 import { VictoryChart, VictoryArea, VictoryTheme } from 'victory';
+import PropTypes from 'prop-types';
 import './Graph.css';
 
 const Graph = ({ dataHelper, range, channelSet }) => {
@@ -21,3 +22,15 @@ const Graph = ({ dataHelper, range, channelSet }) => {
 };
 
 export default Graph;
+
+Graph.propTypes = {
+  channelSet: PropTypes.string.isRequired,
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.array,
+    GPSCoords: PropTypes.array,
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+  range: Proptypes.shape([]).isRequired,
+};

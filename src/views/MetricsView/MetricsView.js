@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MetricTabs from '../../components/MetricTabs/MetricTabs';
 import Graph from '../../components/Graph/Graph';
 import RangeSlider from '../../components/RangeSlider/RangeSlider';
@@ -30,3 +31,17 @@ const MetricsView = ({
   );
 
 export default MetricsView;
+
+MetricsView.propTypes = {
+  channelSet: PropTypes.string.isRequired,
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+  range: PropTypes.shape([]).isRequired,
+  handleRangeChange: PropTypes.func.isRequired,
+  handleChannelChange: PropTypes.func.isRequired,
+};

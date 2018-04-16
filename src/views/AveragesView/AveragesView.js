@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Average from '../../components/Average/Average';
 import './AveragesView.css';
 
@@ -15,3 +16,13 @@ const AveragesView = ({ dataHelper }) =>
   );
 
 export default AveragesView;
+
+AveragesView.propTypes = {
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+};

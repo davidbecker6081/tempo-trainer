@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
 import API_KEYS from '../../api-keys';
 
@@ -84,3 +85,15 @@ export class GoogleMap extends Component {
 export default GoogleApiWrapper({
   apiKey: API_KEYS.GOOGLE_MAPS,
 })(GoogleMap);
+
+GoogleMap.propTypes = {
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+  originalRange: PropTypes.shape([]).isRequired,
+  range: PropTypes.shape([]).isRequired,
+};

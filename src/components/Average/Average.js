@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Average.css';
 
 const Average = ({ channelSet, dataHelper }) => {
@@ -21,3 +22,14 @@ const Average = ({ channelSet, dataHelper }) => {
 };
 
 export default Average;
+
+Average.propTypes = {
+  channelSet: PropTypes.string.isRequired,
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+};
