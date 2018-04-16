@@ -1,0 +1,10 @@
+.share-links-container {
+  height: 400px;
+  width: 400px;
+}
+
+.share-links-logo,
+.share-links-container img {
+  height: 50px;
+  width: 50px;
+}
