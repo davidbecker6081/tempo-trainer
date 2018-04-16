@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router';
+import { Route } from 'react-router';
 import MapView from '../../views/MapView/MapView';
 import MetricsView from '../../views/MetricsView/MetricsView';
 import BestEffortsView from '../../views/BestEffortsView/BestEffortsView';

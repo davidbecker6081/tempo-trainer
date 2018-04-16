@@ -17,5 +17,5 @@ const MetricTabs = ({ handleChannelChange }) =>
 export default MetricTabs;
 
 MetricTabs.propTypes = {
-  handleChannelChange: Proptypes.func.isRequired,
+  handleChannelChange: PropTypes.func.isRequired,
 };
