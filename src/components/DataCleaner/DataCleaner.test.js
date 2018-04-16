@@ -19,25 +19,50 @@ describe('App', () => {
     it('should have a GPSCoords', () => {
       expect(dataCleaner.GPSCoords).toBeDefined();
     });
+    it('should have an array of coordinates', () => {
+      const sample = { lat: 40.01488, lng: -105.131 };
+      expect(dataCleaner.GPSCoords).toHaveLength(5002);
+      expect(dataCleaner.GPSCoords).toContainEqual(sample);
+    });
     it('should have all channelSets', () => {
       const expectedLength = workoutData.channelSet.length;
       const length = dataCleaner.channels.length;
       expect(length).toEqual(expectedLength);
     });
+    it('should have a min and max defaulted at 0', () => {
+      expect(dataCleaner.min).toEqual(0);
+      expect(dataCleaner.max).toEqual(0);
+    });
   });
 
   describe('filterGPSCoords', () => {
-    it('should filter the data and return an array of GPS coordinates', () => {
-      const sample = { lat: 40.01488, lng: -105.131 };
-      expect(dataCleaner.GPSCoords).toHaveLength(5002);
-      expect(dataCleaner.GPSCoords).toContainEqual(sample);
+    describe('data provided', () => {
+      it('should filter the provided data and return an array of GPS coordinates', () => {
+        const sample = { lat: 40.01488, lng: -105.131 };
+        const rangeData = dataCleaner.data.samples.slice(0, 1000);
+        const coords = dataCleaner.filterGPSCoords(rangeData);
+        const rangeDataLength = rangeData.filter(sample => sample.values.positionLong).length;
+
+        expect(coords).toHaveLength(rangeDataLength);
+        expect(coords).toContainEqual(sample);
+      });
     });
-    it('should contain no duplicates', () => {
-      const { samples: mockData } = workoutData;
-      const dataKeysLength = mockData.filter(sample => sample.values.positionLong).length;
-      const GPSCoordsLength = dataCleaner.GPSCoords.length;
-      expect(dataKeysLength).toEqual(GPSCoordsLength);
+
+    describe('data not provided', () => {
+      it('should filter the default data and return an array of GPS coordinates', () => {
+        const sample = { lat: 40.01488, lng: -105.131 };
+        const coords = dataCleaner.filterGPSCoords();
+        const dataSamples = dataCleaner.data.samples;
+        const dataLength = dataSamples.filter(sample => sample.values.positionLong).length;
+
+        expect(coords).toHaveLength(dataLength);
+        expect(coords).toContainEqual(sample);
+      });
     });
+  });
+
+  describe('averageOfSet', () => {
+    it('should ');
   });
 
   describe('calculateBestEffort', () => {

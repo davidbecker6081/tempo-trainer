@@ -2,12 +2,12 @@ export default class DataCleaner {
   constructor(data) {
     this.data = data;
     this.channels = data.channelSet;
-    this.GPSCoords = this.filterGPSCoords(this.data.samples);
+    this.GPSCoords = this.filterGPSCoords();
     this.min = 0;
     this.max = 0;
   }
 
-  filterGPSCoords(rangeData) {
+  filterGPSCoords(rangeData = this.data.samples) {
     const GPSCoords = rangeData.reduce((coords, sample) => {
       const { positionLat: lat, positionLong: lng } = sample.values;
 
