@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './MetricTabs.css';
 
 const MetricTabs = ({ handleChannelChange }) =>
@@ -14,3 +15,7 @@ const MetricTabs = ({ handleChannelChange }) =>
   );
 
 export default MetricTabs;
+
+MetricTabs.propTypes = {
+  handleChannelChange: Proptypes.func.isRequired,
+};
