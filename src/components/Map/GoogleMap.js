@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
+import PolylineComponent from './PolylineComponent';
 import API_KEYS from '../../api-keys';
 
 export class GoogleMap extends Component {
@@ -39,12 +40,12 @@ export class GoogleMap extends Component {
     const filteredOriginalRange = dataHelper.filterDataForMap(originalRange);
     const originalCoords = dataHelper.filterGPSCoords(filteredOriginalRange);
     const startMarker = {
-      lat: originalCoords[0].lat,
-      lng: originalCoords[0].lng,
+      lat: GPSCoords[0].lat,
+      lng: GPSCoords[0].lng,
     };
     const finishMarker = {
-      lat: originalCoords[originalCoords.length - 1].lat,
-      lng: originalCoords[originalCoords.length - 1].lng,
+      lat: GPSCoords[GPSCoords.length - 1].lat,
+      lng: GPSCoords[GPSCoords.length - 1].lng,
     };
 
     return (
@@ -66,7 +67,7 @@ export class GoogleMap extends Component {
         />
         <Polyline
           path={originalCoords}
-          strokeColor="#0000FF"
+          strokeColor="#000000"
           strokeOpacity={0.8}
           strokeWeight={2}
         />
