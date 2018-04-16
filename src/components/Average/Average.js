@@ -27,8 +27,8 @@ Average.propTypes = {
   channelSet: PropTypes.string.isRequired,
   dataHelper: PropTypes.shape({
     data: PropTypes.shape({}),
-    channels: PropTypes.array,
-    GPSCoords: PropTypes.array,
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
     min: PropTypes.number,
     max: PropTypes.number,
   }).isRequired,
