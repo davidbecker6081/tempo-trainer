@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BestEffort from '../../components/BestEffort/BestEffort';
 import './BestEffortsView.css';
 
@@ -48,3 +49,13 @@ const BestEffortsView = ({ channelSet, dataHelper }) => {
 };
 
 export default BestEffortsView;
+
+BestEffortsView.propTypes = {
+  dataHelper: PropTypes.shape({
+    data: PropTypes.shape({}),
+    channels: PropTypes.shape([]),
+    GPSCoords: PropTypes.shape([]),
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }).isRequired,
+};
