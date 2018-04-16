@@ -4,6 +4,7 @@ import MetricsView from '../../views/MetricsView/MetricsView';
 import BestEffortsView from '../../views/BestEffortsView/BestEffortsView';
 import AveragesView from '../../views/AveragesView/AveragesView';
 import TotalsView from '../../views/TotalsView/TotalsView';
+import NavigationView from '../../views/NavigationView/NavigationView';
 import DataCleaner from '../DataCleaner/DataCleaner';
 import workoutData from '../../__mock__/workout-data.json';
 import './App.css';
@@ -45,6 +46,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <NavigationView />
         <MetricsView
           range={range}
           handleRangeChange={this.handleRangeChange}
