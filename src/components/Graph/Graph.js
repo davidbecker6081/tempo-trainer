@@ -27,10 +27,10 @@ Graph.propTypes = {
   channelSet: PropTypes.string.isRequired,
   dataHelper: PropTypes.shape({
     data: PropTypes.shape({}),
-    channels: PropTypes.array,
-    GPSCoords: PropTypes.array,
+    channels: PropTypes.arrayOf(PropTypes.string),
+    GPSCoords: PropTypes.arrayOf(PropTypes.shape({})),
     min: PropTypes.number,
     max: PropTypes.number,
   }).isRequired,
-  range: Proptypes.shape([]).isRequired,
+  range: PropTypes.arrayOf(PropTypes.number).isRequired,
 };

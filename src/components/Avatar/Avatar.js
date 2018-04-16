@@ -9,7 +9,7 @@ const Avatar = ({ user }) => {
   return (
     <article>
       <img src={userImage} alt="user profile" />
-      <h1>Kyle Heppenstall</h1>
+      <h1>{name}</h1>
     </article>
   );
 };
@@ -17,7 +17,7 @@ const Avatar = ({ user }) => {
 export default Avatar;
 
 Avatar.propTypes = {
-  user: Proptypes.shape({
+  user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     profileImg: PropTypes.string.isRequired,
   }).isRequired,

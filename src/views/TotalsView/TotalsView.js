@@ -17,8 +17,8 @@ export default TotalsView;
 TotalsView.propTypes = {
   dataHelper: PropTypes.shape({
     data: PropTypes.shape({}),
-    channels: PropTypes.shape([]),
-    GPSCoords: PropTypes.shape([]),
+    channels: PropTypes.arrayOf(PropTypes.string),
+    GPSCoords: PropTypes.arrayOf(PropTypes.shape({})),
     min: PropTypes.number,
     max: PropTypes.number,
   }).isRequired,

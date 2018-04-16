@@ -36,12 +36,12 @@ MetricsView.propTypes = {
   channelSet: PropTypes.string.isRequired,
   dataHelper: PropTypes.shape({
     data: PropTypes.shape({}),
-    channels: PropTypes.shape([]),
-    GPSCoords: PropTypes.shape([]),
+    channels: PropTypes.arrayOf(PropTypes.string),
+    GPSCoords: PropTypes.arrayOf(PropTypes.shape({})),
     min: PropTypes.number,
     max: PropTypes.number,
   }).isRequired,
-  range: PropTypes.shape([]).isRequired,
+  range: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleRangeChange: PropTypes.func.isRequired,
   handleChannelChange: PropTypes.func.isRequired,
 };
