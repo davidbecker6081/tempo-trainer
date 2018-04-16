@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, Route } from 'react-router';
 import MapView from '../../views/MapView/MapView';
 import MetricsView from '../../views/MetricsView/MetricsView';
 import BestEffortsView from '../../views/BestEffortsView/BestEffortsView';
@@ -47,27 +48,36 @@ class App extends Component {
     return (
       <div className="App">
         <NavigationView />
-        <MetricsView
-          range={range}
-          handleRangeChange={this.handleRangeChange}
-          dataHelper={this.dataHelper}
-          channelSet={channelSet}
-          handleChannelChange={this.handleChannelChange}
-        />
-        <MapView
-          range={range}
-          dataHelper={this.dataHelper}
-          originalRange={originalRange}
-        />
-        <BestEffortsView
-          dataHelper={this.dataHelper}
-          channelSet={channelSet}
-        />
-        <AveragesView
-          dataHelper={this.dataHelper}
-        />
-        <TotalsView
-          dataHelper={this.dataHelper}
+        <Route
+          to="/"
+          render={() =>
+            (
+              <main>
+                <MetricsView
+                  range={range}
+                  handleRangeChange={this.handleRangeChange}
+                  dataHelper={this.dataHelper}
+                  channelSet={channelSet}
+                  handleChannelChange={this.handleChannelChange}
+                />
+                <MapView
+                  range={range}
+                  dataHelper={this.dataHelper}
+                  originalRange={originalRange}
+                />
+                <BestEffortsView
+                  dataHelper={this.dataHelper}
+                  channelSet={channelSet}
+                />
+                <AveragesView
+                  dataHelper={this.dataHelper}
+                />
+                <TotalsView
+                  dataHelper={this.dataHelper}
+                />
+              </main>
+            )
+          }
         />
       </div>
     );
