@@ -25,6 +25,15 @@ export default class DataCleaner {
     return GPSCoords;
   }
 
+  averageOfSet(sampleSet, channelSet) {
+    const sum = samples.reduce((sum, sample, i) => {
+      sum += sample.values[channelSet];
+      return sum;
+    }, 0);
+    const average = sum / samples.length;
+    return average;
+  }
+
   calculateBestEffort(channelSet, time) {
     // "Best" is defined as highest continuous average for the given time period.
     const { samples } = this.data;
