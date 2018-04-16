@@ -39,12 +39,12 @@ export class GoogleMap extends Component {
     const filteredOriginalRange = dataHelper.filterDataForMap(originalRange);
     const originalCoords = dataHelper.filterGPSCoords(filteredOriginalRange);
     const startMarker = {
-      lat: GPSCoords[0].lat,
-      lng: GPSCoords[0].lng,
+      lat: originalCoords[0].lat,
+      lng: originalCoords[0].lng,
     };
     const finishMarker = {
-      lat: GPSCoords[GPSCoords.length - 1].lat,
-      lng: GPSCoords[GPSCoords.length - 1].lng,
+      lat: originalCoords[originalCoords.length - 1].lat,
+      lng: originalCoords[originalCoords.length - 1].lng,
     };
 
     return (
@@ -54,8 +54,8 @@ export class GoogleMap extends Component {
         zoom={12}
         style={style}
         initialCenter={{
-            lat: startMarker.lat,
-            lng: startMarker.lng,
+            lat: originalCoords[1000].lat,
+            lng: originalCoords[1000].lng,
         }}
       >
 
