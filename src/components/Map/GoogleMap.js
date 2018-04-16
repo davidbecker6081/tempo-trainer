@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
-import PolylineComponent from './PolylineComponent';
 import API_KEYS from '../../api-keys';
 
 export class GoogleMap extends Component {
