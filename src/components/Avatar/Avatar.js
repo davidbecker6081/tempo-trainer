@@ -18,14 +18,7 @@ export default Avatar;
 
 Avatar.propTypes = {
   user: Proptypes.shape({
-    name: Proptypes.string,
-    profileImg: Proptypes.string,
-  }),
-};
-
-Avatar.defaultProps = {
-  user: {
-    name: 'David Becker',
-    profileImg: '',
-  },
+    name: PropTypes.string.isRequired,
+    profileImg: PropTypes.string.isRequired,
+  }).isRequired,
 };
