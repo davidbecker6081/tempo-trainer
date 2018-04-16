@@ -13,9 +13,19 @@ const MetricsView = ({
 }) =>
   (
     <div>
-      <MetricTabs handleChannelChange={handleChannelChange} />
-      <Graph range={range} dataHelper={dataHelper} channelSet={channelSet} />
-      <RangeSlider range={range} handleRangeChange={handleRangeChange} dataHelper={dataHelper} />
+      <MetricTabs
+        handleChannelChange={handleChannelChange}
+      />
+      <Graph
+        range={range}
+        dataHelper={dataHelper}
+        channelSet={channelSet}
+      />
+      <RangeSlider
+        range={range}
+        handleRangeChange={handleRangeChange}
+        dataHelper={dataHelper}
+      />
     </div>
   );
 
