@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './BestEffort.css';
 
 const BestEffort = ({
@@ -33,3 +34,13 @@ const BestEffort = ({
 };
 
 export default BestEffort;
+
+BestEffort.propTypes = {
+  channelSet: PropTypes.string.isRequired,
+  timeForCalc: PropTypes.number.isRequired,
+  effort: PropTypes.number.isRequired,
+  timeRange: PropTypes.shape({
+    low: PropTypes.number,
+    high: PropTypes.number,
+  }).isRequired,
+};
