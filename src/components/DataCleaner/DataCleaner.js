@@ -34,6 +34,11 @@ export default class DataCleaner {
     return average;
   }
 
+  createChunk(chunkSize, index) {
+    const { samples } = this.data;
+    return samples.slice(index, index + chunkSize);
+  }
+
   calculateBestEffort(channelSet, time) {
     // "Best" is defined as highest continuous average for the given time period.
     const { samples } = this.data;
