@@ -2,12 +2,10 @@ export default class DataCleaner {
   constructor(data) {
     this.data = data;
     this.channels = data.channelSet;
-    this.GPSCoords = this.filterGPSCoords(this.data.samples);
-    this.min = 0;
-    this.max = 0;
+    this.GPSCoords = this.filterGPSCoords();
   }
 
-  filterGPSCoords(rangeData) {
+  filterGPSCoords(rangeData = this.data.samples) {
     const GPSCoords = rangeData.reduce((coords, sample) => {
       const { positionLat: lat, positionLong: lng } = sample.values;
 
@@ -25,56 +23,61 @@ export default class DataCleaner {
     return GPSCoords;
   }
 
-  calculateBestEffort(channelSet, time) {
-    // "Best" is defined as highest continuous average for the given time period.
+  averageOfSet(channelSet, sampleSet = this.data.samples) {
+    const sum = sampleSet.reduce((sum, sample, i) => {
+      sum += sample.values[channelSet] || 0;
+      return sum;
+    }, 0);
+    const average = sum / sampleSet.length;
+    return average;
+  }
+
+  createChunk(chunkSize, index) {
     const { samples } = this.data;
-    const millisecAmount = time * 60000;
-    const sampleAmount = time * 60;
-    const bestEffort = {
-      range: {
-        low: 0,
-        high: 0,
-      },
-      average: 0,
-      channelSet,
-    };
-    let sampleRange;
-    let totalSample;
-    let millisecs;
-    let currentAverage;
+    return samples.slice(index, index + chunkSize);
+  }
 
-    for (let i = 0; i < samples.length - sampleAmount; i++) {
-      sampleRange = {
-        low: 0,
-        high: 0,
-      };
-      totalSample = 0;
-      millisecs = 0;
-      currentAverage = 0;
+  createChunkSet(chunkSize) {
+    const { samples } = this.data;
+    const chunkSet = [];
+    let j = 0;
 
-      for (let j = 0; j < sampleAmount; j++) {
-        const highIndex = (i + sampleAmount) - 1;
-        const lowIndex = i;
-        const index = i + j;
-        if (i !== 0) {
-          millisecs += samples[index].millisecondOffset - samples[index - 1].millisecondOffset;
-        }
-        totalSample += samples[index].values[channelSet] || 0;
-        sampleRange.low = samples[lowIndex].millisecondOffset;
-        sampleRange.high = samples[highIndex].millisecondOffset;
-      }
-
-      currentAverage = totalSample / sampleAmount;
-      const isNewAverageLarger = currentAverage > bestEffort.average;
-      const sampleRangeDiff = (sampleRange.high - sampleRange.low) + 1000;
-      const isSampleRangeInTime = sampleRangeDiff / millisecAmount === 1;
-      const isSampleRangeEqualToMSAmount = millisecs / millisecAmount === 1;
-
-      if (isNewAverageLarger && isSampleRangeEqualToMSAmount && isSampleRangeInTime) {
-        bestEffort.average = currentAverage;
-        bestEffort.range = sampleRange;
+    for (let i = 0; i < samples.length; i++, j++) {
+      const chunk = this.createChunk(chunkSize, j);
+      if (chunk.length === chunkSize) {
+        chunkSet.push(chunk);
       }
     }
+    return chunkSet;
+  }
+
+  createMockEffort(channelSet) {
+    return {
+      average: 0,
+      range: {
+        high: 0,
+        low: 0,
+      },
+      channelSet,
+    };
+  }
+
+  calculateBestEffort(channelSet, time) {
+    // "Best" is defined as highest continuous average for the given time period.
+    // Using a chunked array
+    const chunkSize = time * 60;
+    const chunkSet = this.createChunkSet(chunkSize);
+    const mockEffort = this.createMockEffort(channelSet);
+    let currentAverage = 0;
+    const bestEffort = chunkSet.reduce((effort, chunk) => {
+      currentAverage = this.averageOfSet(channelSet, chunk);
+      if (currentAverage > mockEffort.average) {
+        mockEffort.average = currentAverage;
+        mockEffort.range.low = chunk[0].millisecondOffset;
+        mockEffort.range.high = chunk[chunk.length - 1].millisecondOffset;
+      }
+      return effort;
+    }, mockEffort);
     return bestEffort;
   }
 
@@ -87,14 +90,6 @@ export default class DataCleaner {
       && sample.millisecondOffset <= endMilliSec);
 
     return rangeArray;
-  }
-
-  calculateAverage(channelSet, rangeData = this.data.samples) {
-    const totalOfChannel = rangeData.reduce((total, sample) => {
-      total += sample.values[channelSet] || 0;
-      return total;
-    }, 0);
-    return totalOfChannel / rangeData.length;
   }
 
   calculateTotal(channelSet, rangeData = this.data.samples) {
@@ -126,15 +121,14 @@ export default class DataCleaner {
     }, samples[0].values.elevation);
   }
 
-  setMinMax() {
+  getMinMax() {
     const { samples } = this.data;
     const startTime = samples[0].millisecondOffset;
     const endTime = samples[samples.length - 1].millisecondOffset;
     const startMinute = Math.round(this.convertMilliToMin(startTime));
     const endMinute = Math.round(this.convertMilliToMin(endTime));
 
-    this.min = startMinute;
-    this.max = endMinute;
+    return [startMinute, endMinute];
   }
 
   filterDataForGraph(channelSet, range) {

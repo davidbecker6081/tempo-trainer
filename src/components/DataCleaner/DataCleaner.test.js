@@ -4,7 +4,7 @@ import { shallow, mount, render, configure } from 'enzyme';
 import DataCleaner from './DataCleaner';
 import workoutData from '../../__mock__/workout-data.json';
 
-describe('App', () => {
+describe('DataCleaner', () => {
   let dataCleaner;
 
   beforeEach(() => {
@@ -19,6 +19,11 @@ describe('App', () => {
     it('should have a GPSCoords', () => {
       expect(dataCleaner.GPSCoords).toBeDefined();
     });
+    it('should have an array of coordinates', () => {
+      const sample = { lat: 40.01488, lng: -105.131 };
+      expect(dataCleaner.GPSCoords).toHaveLength(5002);
+      expect(dataCleaner.GPSCoords).toContainEqual(sample);
+    });
     it('should have all channelSets', () => {
       const expectedLength = workoutData.channelSet.length;
       const length = dataCleaner.channels.length;
@@ -27,16 +32,94 @@ describe('App', () => {
   });
 
   describe('filterGPSCoords', () => {
-    it('should filter the data and return an array of GPS coordinates', () => {
-      const sample = { lat: 40.01488, lng: -105.131 };
-      expect(dataCleaner.GPSCoords).toHaveLength(5002);
-      expect(dataCleaner.GPSCoords).toContainEqual(sample);
+    describe('data provided', () => {
+      it('should filter the provided data and return an array of GPS coordinates', () => {
+        const sample = { lat: 40.01488, lng: -105.131 };
+        const rangeData = dataCleaner.data.samples.slice(0, 1000);
+        const coords = dataCleaner.filterGPSCoords(rangeData);
+        const rangeDataLength = rangeData.filter(sample => sample.values.positionLong).length;
+
+        expect(coords).toHaveLength(rangeDataLength);
+        expect(coords).toContainEqual(sample);
+      });
     });
-    it('should contain no duplicates', () => {
-      const { samples: mockData } = workoutData;
-      const dataKeysLength = mockData.filter(sample => sample.values.positionLong).length;
-      const GPSCoordsLength = dataCleaner.GPSCoords.length;
-      expect(dataKeysLength).toEqual(GPSCoordsLength);
+
+    describe('data not provided', () => {
+      it('should filter the default data and return an array of GPS coordinates', () => {
+        const sample = { lat: 40.01488, lng: -105.131 };
+        const coords = dataCleaner.filterGPSCoords();
+        const dataSamples = dataCleaner.data.samples;
+        const dataLength = dataSamples.filter(sample => sample.values.positionLong).length;
+
+        expect(coords).toHaveLength(dataLength);
+        expect(coords).toContainEqual(sample);
+      });
+    });
+  });
+
+  describe('Chunks', () => {
+    let sampleSet;
+    let channelSet;
+    let chunkSize;
+    let index;
+
+    beforeEach(() => {
+      sampleSet = [
+        { values: { power: 15 } },
+        { values: { power: 10 } },
+        { values: { power: 25 } },
+        { values: { power: 6 } },
+        { values: { power: 7 } },
+        { values: { power: 9 } },
+        { values: { power: 20 } },
+        { values: { power: 15 } },
+      ];
+      channelSet = 'power';
+      chunkSize = 60;
+      index = 0;
+    });
+
+    describe('averageSet', () => {
+      describe('data provided', () => {
+        it('should calculate the correct average for a channel', () => {
+          const expectedAverage = 13.375;
+          const sampleAverage = dataCleaner.averageOfSet(channelSet, sampleSet);
+          expect(sampleAverage).toEqual(expectedAverage);
+        });
+      });
+      describe('data not provided', () => {
+        it('should calculate the correct average for a channel', () => {
+          const expectedAveragePower = 172.8601356743815;
+          const averagePower = dataCleaner.averageOfSet('power');
+          expect(averagePower).toEqual(expectedAveragePower);
+        });
+      });
+    });
+
+    describe('createChunk', () => {
+      it('should create a chunk of correct size', () => {
+        const chunk = dataCleaner.createChunk(chunkSize, index);
+        expect(chunk.length).toEqual(chunkSize);
+      });
+    });
+
+    describe('createChunkSet', () => {
+      it('should create a set of chunks with the sample data', () => {
+        const actualSet = dataCleaner.createChunkSet(chunkSize);
+        const expectedSetLength = 4953;
+        expect(actualSet.length).toEqual(expectedSetLength);
+        expect(actualSet[0]).toHaveLength(chunkSize);
+      });
+    });
+
+    describe('createMockEffort', () => {
+      it('should create a mock object', () => {
+        const effort = dataCleaner.createMockEffort('power');
+        expect(effort.average).toEqual(0);
+        expect(effort.range.low).toEqual(0);
+        expect(effort.range.high).toEqual(0);
+        expect(effort.channelSet).toEqual('power');
+      });
     });
   });
 
@@ -212,23 +295,7 @@ describe('App', () => {
       expect(dataLengthCheck).toBeGreaterThan(rangeArray.length);
     });
   });
-  describe('calculate Average', () => {
-    describe('data provided', () => {
-      it('should calculate the correct average for a channel', () => {
-        const expectedAveragePower = 191.16883116883116;
-        const rangeData = dataCleaner.changeRangeOfTime(1, 10);
-        const averagePower = dataCleaner.calculateAverage('power', rangeData);
-        expect(averagePower).toEqual(expectedAveragePower);
-      });
-    });
-    describe('data not provided', () => {
-      it('should calculate the correct average for a channel', () => {
-        const expectedAveragePower = 172.8601356743815;
-        const averagePower = dataCleaner.calculateAverage('power');
-        expect(averagePower).toEqual(expectedAveragePower);
-      });
-    });
-  });
+
   describe('calculate total', () => {
     describe('data provided', () => {
       it('should calculate the correct total for a channel of millisecondOffset', () => {
@@ -255,6 +322,55 @@ describe('App', () => {
         const totalDistance = dataCleaner.calculateTotal('distance');
         expect(totalDistance).toEqual(expectedTotalDistance);
       });
+    });
+  });
+
+  describe('convertMilliToMin', () => {
+    it('should convert milliseconds to minutes', () => {
+      const expectedMin = 5;
+      const converted = dataCleaner.convertMilliToMin(300000);
+      expect(converted).toEqual(expectedMin);
+    });
+  });
+
+  describe('calculateTotalElevationGain', () => {
+    it('should calculate elevation gain based on all data', () => {
+      const expectedGain = 1536.3999999999999;
+      const actualGain = dataCleaner.calculateTotalElevationGain();
+      expect(actualGain).toEqual(expectedGain);
+    });
+  });
+
+  describe('getMinMax', () => {
+    it('should return an array with a start minute and finish minute', () => {
+      const expectedMin = 0;
+      const expectedMax = 86;
+      const actualMinMax = dataCleaner.getMinMax();
+      expect(actualMinMax[0]).toEqual(expectedMin);
+      expect(actualMinMax[1]).toEqual(expectedMax);
+    });
+  });
+
+  describe('filterDataForGraph', () => {
+    it('should filter data based on a range', () => {
+      const expectedLength = 5012;
+      const range = [0, 86];
+      const actualLength = dataCleaner.filterDataForGraph('power', range).length;
+      expect(actualLength).toEqual(expectedLength);
+    });
+    it('should contain data in correct format for graph', () => {
+      const range = [0, 86];
+      const filteredData = dataCleaner.filterDataForGraph('power', range);
+      expect(filteredData[0].time).toBeDefined();
+      expect(filteredData[0].power).toBeDefined();
+    });
+  });
+  describe('filterDataForMap', () => {
+    it('should filter data based on a range', () => {
+      const expectedLength = 5012;
+      const range = [0, 86];
+      const actualLength = dataCleaner.filterDataForMap(range).length;
+      expect(actualLength).toEqual(expectedLength);
     });
   });
 });

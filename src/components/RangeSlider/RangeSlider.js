@@ -1,59 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './RangeSlider.css';
 
-class RangeSlider extends Component {
-  constructor() {
-    super();
-    this.state = {
-      min: 0,
-      max: 0,
-    };
-  }
+const RangeSlider = ({ originalRange, handleRangeChange, range }) => {
+  const min = originalRange[0];
+  const max = originalRange[1];
+  const style = { width: '50vw', height: '10vh' };
 
-  componentWillMount() {
-    const { dataHelper } = this.props;
-    dataHelper.setMinMax();
-    this.setState({
-      min: dataHelper.min,
-      max: dataHelper.max,
-    });
-  }
+  return (
+    <div>
+      <Range
+        min={min}
+        max={max}
+        allowCross={false}
+        onChange={e => handleRangeChange(e)}
+        defaultValue={[min, max]}
+        value={range}
+        style={style}
+        pushable={1}
+      />
+    </div>
+  );
+};
 
-  render() {
-    const { min, max } = this.state;
-    const { handleRangeChange, range } = this.props;
-    const style = { width: '50vw', height: '10vh' };
-
-    return (
-      <div>
-        <Range
-          min={min}
-          max={max}
-          allowCross={false}
-          onChange={e => handleRangeChange(e)}
-          defaultValue={[min, max]}
-          value={range}
-          style={style}
-          pushable={1}
-        />
-      </div>
-    );
-  }
-}
 
 export default RangeSlider;
 
 RangeSlider.propTypes = {
-  dataHelper: PropTypes.shape({
-    data: PropTypes.shape({}),
-    channels: PropTypes.arrayOf(PropTypes.string),
-    GPSCoords: PropTypes.arrayOf(PropTypes.shape({})),
-    min: PropTypes.number,
-    max: PropTypes.number,
-  }).isRequired,
   handleRangeChange: PropTypes.func.isRequired,
   range: PropTypes.arrayOf(PropTypes.number).isRequired,
+  originalRange: PropTypes.arrayOf(PropTypes.number).isRequired,
 };

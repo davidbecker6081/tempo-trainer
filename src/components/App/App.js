@@ -24,9 +24,10 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.dataHelper.setMinMax();
+    const minMax = this.dataHelper.getMinMax();
     this.setState({
-      range: [this.dataHelper.min, this.dataHelper.max],
+      range: minMax,
+      originalRange: minMax,
     });
   }
 
@@ -59,6 +60,7 @@ class App extends Component {
                   dataHelper={this.dataHelper}
                   channelSet={channelSet}
                   handleChannelChange={this.handleChannelChange}
+                  originalRange={originalRange}
                 />
                 <MapView
                   range={range}
