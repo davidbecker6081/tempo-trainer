@@ -11,17 +11,20 @@ describe('DataCleaner', () => {
     dataCleaner = new DataCleaner(workoutData);
   });
 
-  it('exists', () => {
-    expect(dataCleaner.data).toBeDefined();
-  });
 
   describe('Constructor', () => {
+    it('should have original data', () => {
+      expect(dataCleaner.originalData.samples).toHaveLength(5012);
+    });
+    it('should have data filtered by the half minute', () => {
+      expect(dataCleaner.minuteData).toHaveLength(168);
+    });
     it('should have a GPSCoords', () => {
       expect(dataCleaner.GPSCoords).toBeDefined();
     });
     it('should have an array of coordinates', () => {
-      const sample = { lat: 40.01488, lng: -105.131 };
-      expect(dataCleaner.GPSCoords).toHaveLength(5002);
+      const sample = { lat: 40.01958, lng: -105.13111 };
+      expect(dataCleaner.GPSCoords).toHaveLength(167);
       expect(dataCleaner.GPSCoords).toContainEqual(sample);
     });
     it('should have all channelSets', () => {
@@ -34,8 +37,8 @@ describe('DataCleaner', () => {
   describe('filterGPSCoords', () => {
     describe('data provided', () => {
       it('should filter the provided data and return an array of GPS coordinates', () => {
-        const sample = { lat: 40.01488, lng: -105.131 };
-        const rangeData = dataCleaner.data.samples.slice(0, 1000);
+        const sample = { lat: 40.01958, lng: -105.13111 };
+        const rangeData = dataCleaner.minuteData.slice(0, 1000);
         const coords = dataCleaner.filterGPSCoords(rangeData);
         const rangeDataLength = rangeData.filter(sample => sample.values.positionLong).length;
 
@@ -46,9 +49,9 @@ describe('DataCleaner', () => {
 
     describe('data not provided', () => {
       it('should filter the default data and return an array of GPS coordinates', () => {
-        const sample = { lat: 40.01488, lng: -105.131 };
+        const sample = { lat: 40.01958, lng: -105.13111 };
         const coords = dataCleaner.filterGPSCoords();
-        const dataSamples = dataCleaner.data.samples;
+        const dataSamples = dataCleaner.minuteData;
         const dataLength = dataSamples.filter(sample => sample.values.positionLong).length;
 
         expect(coords).toHaveLength(dataLength);
@@ -289,9 +292,9 @@ describe('DataCleaner', () => {
       expect(rangeArray.length).toEqual(0);
     });
     it('should not change the original data', () => {
-      const dataLength = dataCleaner.data.samples.length;
+      const dataLength = dataCleaner.originalData.samples.length;
       const rangeArray = dataCleaner.changeRangeOfTime(1, 2);
-      const dataLengthCheck = dataCleaner.data.samples.length;
+      const dataLengthCheck = dataCleaner.originalData.samples.length;
       expect(dataLengthCheck).toBeGreaterThan(rangeArray.length);
     });
   });
@@ -299,13 +302,13 @@ describe('DataCleaner', () => {
   describe('calculate total', () => {
     describe('data provided', () => {
       it('should calculate the correct total for a channel of millisecondOffset', () => {
-        const expectedTotalTime = 178125000;
+        const expectedTotalTime = 6270000;
         const rangeData = dataCleaner.changeRangeOfTime(1, 10);
         const totalTime = dataCleaner.calculateTotal('millisecondOffset', rangeData);
         expect(totalTime).toEqual(expectedTotalTime);
       });
       it('should calculate the correct total for a channel not millisecondOffset', () => {
-        const expectedTotalDistance = 1721330.789999999;
+        const expectedTotalDistance = 60520.5;
         const rangeData = dataCleaner.changeRangeOfTime(1, 10);
         const totalDistance = dataCleaner.calculateTotal('distance', rangeData);
         expect(totalDistance).toEqual(expectedTotalDistance);
@@ -344,7 +347,7 @@ describe('DataCleaner', () => {
   describe('getMinMax', () => {
     it('should return an array with a start minute and finish minute', () => {
       const expectedMin = 0;
-      const expectedMax = 86;
+      const expectedMax = 84;
       const actualMinMax = dataCleaner.getMinMax();
       expect(actualMinMax[0]).toEqual(expectedMin);
       expect(actualMinMax[1]).toEqual(expectedMax);
@@ -353,13 +356,13 @@ describe('DataCleaner', () => {
 
   describe('filterDataForGraph', () => {
     it('should filter data based on a range', () => {
-      const expectedLength = 5012;
-      const range = [0, 86];
+      const expectedLength = 168;
+      const range = [0, 84];
       const actualLength = dataCleaner.filterDataForGraph('power', range).length;
       expect(actualLength).toEqual(expectedLength);
     });
     it('should contain data in correct format for graph', () => {
-      const range = [0, 86];
+      const range = [0, 84];
       const filteredData = dataCleaner.filterDataForGraph('power', range);
       expect(filteredData[0].time).toBeDefined();
       expect(filteredData[0].power).toBeDefined();
@@ -367,8 +370,8 @@ describe('DataCleaner', () => {
   });
   describe('filterDataForMap', () => {
     it('should filter data based on a range', () => {
-      const expectedLength = 5012;
-      const range = [0, 86];
+      const expectedLength = 168;
+      const range = [0, 84];
       const actualLength = dataCleaner.filterDataForMap(range).length;
       expect(actualLength).toEqual(expectedLength);
     });

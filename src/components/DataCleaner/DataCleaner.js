@@ -1,11 +1,12 @@
 export default class DataCleaner {
   constructor(data) {
-    this.data = data;
+    this.originalData = data;
+    this.minuteData = this.filterByHalfMinute(data.samples);
     this.channels = data.channelSet;
     this.GPSCoords = this.filterGPSCoords();
   }
 
-  filterGPSCoords(rangeData = this.data.samples) {
+  filterGPSCoords(rangeData = this.minuteData) {
     const GPSCoords = rangeData.reduce((coords, sample) => {
       const { positionLat: lat, positionLong: lng } = sample.values;
 
@@ -23,7 +24,7 @@ export default class DataCleaner {
     return GPSCoords;
   }
 
-  averageOfSet(channelSet, sampleSet = this.data.samples) {
+  averageOfSet(channelSet, sampleSet = this.originalData.samples) {
     const sum = sampleSet.reduce((sum, sample, i) => {
       sum += sample.values[channelSet] || 0;
       return sum;
@@ -33,16 +34,14 @@ export default class DataCleaner {
   }
 
   createChunk(chunkSize, index) {
-    const { samples } = this.data;
-    return samples.slice(index, index + chunkSize);
+    return this.originalData.samples.slice(index, index + chunkSize);
   }
 
   createChunkSet(chunkSize) {
-    const { samples } = this.data;
     const chunkSet = [];
     let j = 0;
 
-    for (let i = 0; i < samples.length; i++, j++) {
+    for (let i = 0; i < this.originalData.samples.length; i++, j++) {
       const chunk = this.createChunk(chunkSize, j);
       if (chunk.length === chunkSize) {
         chunkSet.push(chunk);
@@ -82,17 +81,16 @@ export default class DataCleaner {
   }
 
   changeRangeOfTime(start, end) {
-    const { samples } = this.data;
     const startMillisec = start * 60000;
     const endMilliSec = end * 60000;
-    const rangeArray = samples.filter(sample =>
+    const rangeArray = this.minuteData.filter(sample =>
       sample.millisecondOffset >= startMillisec
       && sample.millisecondOffset <= endMilliSec);
 
     return rangeArray;
   }
 
-  calculateTotal(channelSet, rangeData = this.data.samples) {
+  calculateTotal(channelSet, rangeData = this.originalData.samples) {
     if (channelSet === 'millisecondOffset') {
       return rangeData.reduce((total, sample) => {
         total += sample[channelSet] || 0;
@@ -111,7 +109,8 @@ export default class DataCleaner {
   }
 
   calculateTotalElevationGain() {
-    const { samples } = this.data;
+    const { samples } = this.originalData;
+
     return samples.reduce((gain, sample, i) => {
       if (i < samples.length - 1) {
         const difference = samples[i + 1].values.elevation - sample.values.elevation;
@@ -122,19 +121,20 @@ export default class DataCleaner {
   }
 
   getMinMax() {
-    const { samples } = this.data;
-    const startTime = samples[0].millisecondOffset;
-    const endTime = samples[samples.length - 1].millisecondOffset;
+    const startTime = this.minuteData[0].millisecondOffset;
+    const endTime = this.minuteData[this.minuteData.length - 1].millisecondOffset;
     const startMinute = Math.round(this.convertMilliToMin(startTime));
     const endMinute = Math.round(this.convertMilliToMin(endTime));
 
     return [startMinute, endMinute];
   }
 
-  filterDataForGraph(channelSet, range) {
-    const { samples } = this.data;
+  filterByHalfMinute(data) {
+    return data.filter((sample, i) => sample.millisecondOffset % 30000 === 0);
+  }
 
-    return samples.reduce((filteredArray, sample, i) => {
+  filterDataForGraph(channelSet, range) {
+    return this.minuteData.reduce((filteredArray, sample, i) => {
       const currentTime = this.convertMilliToMin(sample.millisecondOffset);
       const isCurrentInRange = currentTime >= range[0] && currentTime <= range[1];
       if (isCurrentInRange) {
@@ -148,9 +148,7 @@ export default class DataCleaner {
   }
 
   filterDataForMap(range) {
-    const { samples } = this.data;
-
-    return samples.reduce((filteredArray, sample, i) => {
+    return this.minuteData.reduce((filteredArray, sample, i) => {
       const currentTime = this.convertMilliToMin(sample.millisecondOffset);
       const isCurrentInRange = currentTime >= range[0] && currentTime <= range[1];
       if (isCurrentInRange) {

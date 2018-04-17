@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import './Total.css';
 
 const Total = ({ channelSet, dataHelper }) => {
-  const lastEntry = dataHelper.data.samples[dataHelper.data.samples.length - 1];
+  const { samples } = dataHelper.originalData;
+  const lastEntry = samples[samples.length - 1];
   const totalMilli = lastEntry.millisecondOffset;
   const totalCleaner = {
     millisecondOffset: Math.round(dataHelper.convertMilliToMin(totalMilli) * 10) / 10,
