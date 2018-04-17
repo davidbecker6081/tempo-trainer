@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MetricsView channelSet is defined should render correclty 1`] = `undefined`;
+
+exports[`MetricsView dataHelper is defined should render correclty 1`] = `undefined`;
+
+exports[`MetricsView originalRange is defined should render correclty 1`] = `undefined`;
+
+exports[`MetricsView range is defined should render correclty 1`] = `undefined`;
