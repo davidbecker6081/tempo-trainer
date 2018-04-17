@@ -12,7 +12,6 @@ describe('Total', () => {
   beforeEach(() => {
     mockProps = {
       channelSet: '',
-      dataHelper: {},
     };
   });
 

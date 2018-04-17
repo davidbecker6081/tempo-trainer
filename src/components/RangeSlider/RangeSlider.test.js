@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import RangeSlider from './RangeSlider';
 
-describe('RangleSlider', () => {
+describe('RangeSlider', () => {
   let wrapper;
   let mockProps;
 
