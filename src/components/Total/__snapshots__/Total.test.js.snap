@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Total channelSet is defined should render correclty 1`] = `undefined`;
+
+exports[`Total dataHelper is defined should render correclty 1`] = `undefined`;

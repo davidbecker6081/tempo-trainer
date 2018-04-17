@@ -4,4 +4,4 @@ exports[`Graph channelSet is defined should render correclty 1`] = `undefined`;
 
 exports[`Graph dataHelper is defined should render correclty 1`] = `undefined`;
 
-exports[`Graph dataHelper is defined should render correclty 2`] = `undefined`;
+exports[`Graph range is defined should render correclty 1`] = `undefined`;

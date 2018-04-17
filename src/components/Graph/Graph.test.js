@@ -29,7 +29,7 @@ describe('Graph', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
-  describe('dataHelper is defined', () => {
+  describe('range is defined', () => {
     beforeEach(() => { mockProps.range = [0, 10]; });
     it('should render correclty', () => {
       expect(wrapper).toMatchSnapshot();
