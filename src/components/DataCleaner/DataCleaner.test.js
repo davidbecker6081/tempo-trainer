@@ -29,10 +29,6 @@ describe('DataCleaner', () => {
       const length = dataCleaner.channels.length;
       expect(length).toEqual(expectedLength);
     });
-    it('should have a min and max defaulted at 0', () => {
-      expect(dataCleaner.min).toEqual(0);
-      expect(dataCleaner.max).toEqual(0);
-    });
   });
 
   describe('filterGPSCoords', () => {
@@ -342,6 +338,39 @@ describe('DataCleaner', () => {
       const expectedGain = 1536.3999999999999;
       const actualGain = dataCleaner.calculateTotalElevationGain();
       expect(actualGain).toEqual(expectedGain);
+    });
+  });
+
+  describe('getMinMax', () => {
+    it('should return an array with a start minute and finish minute', () => {
+      const expectedMin = 0;
+      const expectedMax = 86;
+      const actualMinMax = dataCleaner.getMinMax();
+      expect(actualMinMax[0]).toEqual(expectedMin);
+      expect(actualMinMax[1]).toEqual(expectedMax);
+    });
+  });
+
+  describe('filterDataForGraph', () => {
+    it('should filter data based on a range', () => {
+      const expectedLength = 5012;
+      const range = [0, 86];
+      const actualLength = dataCleaner.filterDataForGraph('power', range).length;
+      expect(actualLength).toEqual(expectedLength);
+    });
+    it('should contain data in correct format for graph', () => {
+      const range = [0, 86];
+      const filteredData = dataCleaner.filterDataForGraph('power', range);
+      expect(filteredData[0].time).toBeDefined();
+      expect(filteredData[0].power).toBeDefined();
+    });
+  });
+  describe('filterDataForMap', () => {
+    it('should filter data based on a range', () => {
+      const expectedLength = 5012;
+      const range = [0, 86];
+      const actualLength = dataCleaner.filterDataForMap(range).length;
+      expect(actualLength).toEqual(expectedLength);
     });
   });
 });
