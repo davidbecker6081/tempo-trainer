@@ -11,6 +11,7 @@ const MetricsView = ({
   dataHelper,
   channelSet,
   handleChannelChange,
+  originalRange,
 }) =>
   (
     <div>
@@ -26,6 +27,7 @@ const MetricsView = ({
         range={range}
         handleRangeChange={handleRangeChange}
         dataHelper={dataHelper}
+        originalRange={originalRange}
       />
     </div>
   );
@@ -44,4 +46,5 @@ MetricsView.propTypes = {
   range: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleRangeChange: PropTypes.func.isRequired,
   handleChannelChange: PropTypes.func.isRequired,
+  originalRange: PropTypes.arrayOf(PropTypes.number).isRequired,
 };

@@ -328,4 +328,20 @@ describe('DataCleaner', () => {
       });
     });
   });
+
+  describe('convertMilliToMin', () => {
+    it('should convert milliseconds to minutes', () => {
+      const expectedMin = 5;
+      const converted = dataCleaner.convertMilliToMin(300000);
+      expect(converted).toEqual(expectedMin);
+    });
+  });
+
+  describe('calculateTotalElevationGain', () => {
+    it('should calculate elevation gain based on all data', () => {
+      const expectedGain = 1536.3999999999999;
+      const actualGain = dataCleaner.calculateTotalElevationGain();
+      expect(actualGain).toEqual(expectedGain);
+    });
+  });
 });
