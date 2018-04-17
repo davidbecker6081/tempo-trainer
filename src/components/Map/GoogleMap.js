@@ -91,8 +91,6 @@ GoogleMap.propTypes = {
     data: PropTypes.shape({}),
     channels: PropTypes.arrayOf(PropTypes.string),
     GPSCoords: PropTypes.arrayOf(PropTypes.shape({})),
-    min: PropTypes.number,
-    max: PropTypes.number,
   }).isRequired,
   originalRange: PropTypes.arrayOf(PropTypes.number).isRequired,
   range: PropTypes.arrayOf(PropTypes.number).isRequired,

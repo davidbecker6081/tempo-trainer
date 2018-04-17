@@ -41,7 +41,5 @@ Total.propTypes = {
     data: PropTypes.shape({}),
     channels: PropTypes.arrayOf(PropTypes.string),
     GPSCoords: PropTypes.arrayOf(PropTypes.shape({})),
-    min: PropTypes.number,
-    max: PropTypes.number,
   }).isRequired,
 };

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Average channelSet is defined should render correclty 1`] = `undefined`;
+
+exports[`Average dataHelper is defined should render correclty 1`] = `undefined`;
