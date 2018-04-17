@@ -10,7 +10,7 @@ const Graph = ({ dataHelper, range, channelSet }) => {
     <div>
       <VictoryChart theme={VictoryTheme.material}>
         <VictoryArea
-          style={{ data: { fill: '#0000AA' } }}
+          style={{ data: { fill: '#72C6E9' } }}
           data={data}
           barRatio={0.8}
           x="time"

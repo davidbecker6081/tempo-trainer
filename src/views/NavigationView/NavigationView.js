@@ -12,7 +12,7 @@ const NavigationView = () => {
   };
 
   return (
-    <header>
+    <header className="nav-wrapper">
       <Avatar user={user} />
       <NavLinks />
       <ShareLinks />

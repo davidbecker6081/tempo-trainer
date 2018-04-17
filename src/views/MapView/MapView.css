@@ -1,5 +1,5 @@
 .google-map-wrapper {
-  /* position: static; */
-  width: 75vw;
+  padding-left: 15vw;
   height: 30vh;
+  width: 75vw;
 }

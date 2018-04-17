@@ -4,14 +4,14 @@ import './NavLinks.css';
 
 const NavLinks = () =>
   (
-    <nav>
-      <Link to="/">Dashboard</Link>
-      <Link to="/">Calendar</Link>
-      <Link to="/">Nutrition</Link>
-      <Link to="/">Goals</Link>
-      <Link to="/">Notes</Link>
-      <Link to="/">Settings</Link>
-      <Link to="/">Account</Link>
+    <nav className="navlinks-container">
+      <Link to="/" className="navlink">Dashboard</Link>
+      <Link to="/" className="navlink">Calendar</Link>
+      <Link to="/" className="navlink">Nutrition</Link>
+      <Link to="/" className="navlink">Goals</Link>
+      <Link to="/" className="navlink">Notes</Link>
+      <Link to="/" className="navlink">Settings</Link>
+      <Link to="/" className="navlink">Account</Link>
     </nav>
   );
 
