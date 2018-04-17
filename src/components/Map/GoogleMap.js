@@ -31,23 +31,33 @@ export class GoogleMap extends Component {
     );
   }
 
+  calculateGPSCoords(dataHelper, range) {
+    const filteredRangeData = dataHelper.filterDataForMap(range);
+    const GPSCoords = dataHelper.filterGPSCoords(filteredRangeData);
+
+    return GPSCoords;
+  }
+
+  constructMarkers(coords) {
+    return {
+      start: {
+        lat: coords[0].lat,
+        lng: coords[0].lng,
+      },
+      finish: {
+        lat: coords[coords.length - 1].lat,
+        lng: coords[coords.length - 1].lng,
+      },
+    };
+  }
+
   render() {
     const { dataHelper, originalRange } = this.props;
     const { range } = this.state;
     const style = { height: '50%', width: '50%' };
-    const filteredRangeData = dataHelper.filterDataForMap(range);
-    const GPSCoords = dataHelper.filterGPSCoords(filteredRangeData);
-    const filteredOriginalRange = dataHelper.filterDataForMap(originalRange);
-    const originalCoords = dataHelper.filterGPSCoords(filteredOriginalRange);
-    // console.log(GPSCoords, range, filteredRangeData)
-    const startMarker = {
-      lat: GPSCoords[0].lat,
-      lng: GPSCoords[0].lng,
-    };
-    const finishMarker = {
-      lat: GPSCoords[GPSCoords.length - 1].lat,
-      lng: GPSCoords[GPSCoords.length - 1].lng,
-    };
+    const rangeCoords = this.calculateGPSCoords(dataHelper, range);
+    const originalCoords = this.calculateGPSCoords(dataHelper, originalRange);
+    const { start: startMarker, finish: finishMarker } = this.constructMarkers(rangeCoords);
 
     return (
       <Map
@@ -62,6 +72,7 @@ export class GoogleMap extends Component {
       >
 
         <Marker
+          title={`${range[0]}`}
           onClick={this.onMarkerClick}
           name="Current location"
           position={{ lat: startMarker.lat, lng: startMarker.lng }}
@@ -72,8 +83,9 @@ export class GoogleMap extends Component {
           strokeOpacity={0.8}
           strokeWeight={3}
         />
-        {this.createHighlightPolyline(GPSCoords)}
+        {this.createHighlightPolyline(rangeCoords)}
         <Marker
+          title={`${range[1]}`}
           onClick={this.onMarkerClick}
           name="Past location"
           position={{ lat: finishMarker.lat, lng: finishMarker.lng }}
