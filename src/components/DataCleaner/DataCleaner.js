@@ -25,9 +25,9 @@ export default class DataCleaner {
     return GPSCoords;
   }
 
-  averageOfSet(sampleSet, channelSet) {
+  averageOfSet(channelSet, sampleSet = this.data.samples) {
     const sum = sampleSet.reduce((sum, sample, i) => {
-      sum += sample.values[channelSet];
+      sum += sample.values[channelSet] || 0;
       return sum;
     }, 0);
     const average = sum / sampleSet.length;
@@ -72,7 +72,7 @@ export default class DataCleaner {
     const mockEffort = this.createMockEffort(channelSet);
     let currentAverage = 0;
     const bestEffort = chunkSet.reduce((effort, chunk) => {
-      currentAverage = this.averageOfSet(chunk, channelSet);
+      currentAverage = this.averageOfSet(channelSet, chunk);
       if (currentAverage > mockEffort.average) {
         mockEffort.average = currentAverage;
         mockEffort.range.low = chunk[0].millisecondOffset;
@@ -92,14 +92,6 @@ export default class DataCleaner {
       && sample.millisecondOffset <= endMilliSec);
 
     return rangeArray;
-  }
-
-  calculateAverage(channelSet, rangeData = this.data.samples) {
-    const totalOfChannel = rangeData.reduce((total, sample) => {
-      total += sample.values[channelSet] || 0;
-      return total;
-    }, 0);
-    return totalOfChannel / rangeData.length;
   }
 
   calculateTotal(channelSet, rangeData = this.data.samples) {

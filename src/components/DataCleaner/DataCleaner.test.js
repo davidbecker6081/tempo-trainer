@@ -4,7 +4,7 @@ import { shallow, mount, render, configure } from 'enzyme';
 import DataCleaner from './DataCleaner';
 import workoutData from '../../__mock__/workout-data.json';
 
-describe('App', () => {
+describe('DataCleaner', () => {
   let dataCleaner;
 
   beforeEach(() => {
@@ -61,8 +61,70 @@ describe('App', () => {
     });
   });
 
-  describe('averageOfSet', () => {
-    it('should ');
+  describe('Chunks', () => {
+    let sampleSet;
+    let channelSet;
+    let chunkSize;
+    let index;
+
+    beforeEach(() => {
+      sampleSet = [
+        { values: { power: 15 } },
+        { values: { power: 10 } },
+        { values: { power: 25 } },
+        { values: { power: 6 } },
+        { values: { power: 7 } },
+        { values: { power: 9 } },
+        { values: { power: 20 } },
+        { values: { power: 15 } },
+      ];
+      channelSet = 'power';
+      chunkSize = 60;
+      index = 0;
+    });
+
+    describe('averageSet', () => {
+      describe('data provided', () => {
+        it('should calculate the correct average for a channel', () => {
+          const expectedAverage = 13.375;
+          const sampleAverage = dataCleaner.averageOfSet(channelSet, sampleSet);
+          expect(sampleAverage).toEqual(expectedAverage);
+        });
+      });
+      describe('data not provided', () => {
+        it('should calculate the correct average for a channel', () => {
+          const expectedAveragePower = 172.8601356743815;
+          const averagePower = dataCleaner.averageOfSet('power');
+          expect(averagePower).toEqual(expectedAveragePower);
+        });
+      });
+    });
+
+    describe('createChunk', () => {
+      it('should create a chunk of correct size', () => {
+        const chunk = dataCleaner.createChunk(chunkSize, index);
+        expect(chunk.length).toEqual(chunkSize);
+      });
+    });
+
+    describe('createChunkSet', () => {
+      it('should create a set of chunks with the sample data', () => {
+        const actualSet = dataCleaner.createChunkSet(chunkSize);
+        const expectedSetLength = 4953;
+        expect(actualSet.length).toEqual(expectedSetLength);
+        expect(actualSet[0]).toHaveLength(chunkSize);
+      });
+    });
+
+    describe('createMockEffort', () => {
+      it('should create a mock object', () => {
+        const effort = dataCleaner.createMockEffort('power');
+        expect(effort.average).toEqual(0);
+        expect(effort.range.low).toEqual(0);
+        expect(effort.range.high).toEqual(0);
+        expect(effort.channelSet).toEqual('power');
+      });
+    });
   });
 
   describe('calculateBestEffort', () => {
@@ -237,23 +299,7 @@ describe('App', () => {
       expect(dataLengthCheck).toBeGreaterThan(rangeArray.length);
     });
   });
-  describe('calculate Average', () => {
-    describe('data provided', () => {
-      it('should calculate the correct average for a channel', () => {
-        const expectedAveragePower = 191.16883116883116;
-        const rangeData = dataCleaner.changeRangeOfTime(1, 10);
-        const averagePower = dataCleaner.calculateAverage('power', rangeData);
-        expect(averagePower).toEqual(expectedAveragePower);
-      });
-    });
-    describe('data not provided', () => {
-      it('should calculate the correct average for a channel', () => {
-        const expectedAveragePower = 172.8601356743815;
-        const averagePower = dataCleaner.calculateAverage('power');
-        expect(averagePower).toEqual(expectedAveragePower);
-      });
-    });
-  });
+
   describe('calculate total', () => {
     describe('data provided', () => {
       it('should calculate the correct total for a channel of millisecondOffset', () => {

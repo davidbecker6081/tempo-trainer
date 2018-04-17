@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Average.css';
 
 const Average = ({ channelSet, dataHelper }) => {
-  const average = dataHelper.calculateAverage(channelSet);
+  const average = dataHelper.averageOfSet(channelSet);
   const averageCleaner = {
     power: Math.round(average),
     heartRate: Math.round(average),
