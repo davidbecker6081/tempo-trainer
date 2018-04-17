@@ -1,19 +1,22 @@
 import React from 'react';
 import logo from '../../assets/pocket-watch.png';
+import facebookLogo from '../../assets/facebook-circular-logo.svg';
+import instagramLogo from '../../assets/instagram-logo.svg';
+import twitterLogo from '../../assets/twitter.svg';
 import './ShareLinks.css';
 
 const ShareLinks = () =>
   (
     <article className="share-links-container">
       <img className="share-links-logo" src={logo} alt="Tempo Trainer Logo" />
-      <article>
+      <article className="share-links-wrapper">
         <a
           href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
           alt="Facebook Link"
         >
-          <img src={logo} alt="facebook link" />
+          <img className="share-link" src={facebookLogo} alt="facebook link" />
         </a>
         <a
           href="https://www.instagram.com"
@@ -21,7 +24,7 @@ const ShareLinks = () =>
           rel="noopener noreferrer"
           alt="Instagram Link"
         >
-          <img src={logo} alt="instagram link" />
+          <img className="share-link" src={instagramLogo} alt="instagram link" />
         </a>
         <a
           href="https://www.twitter.com"
@@ -29,7 +32,7 @@ const ShareLinks = () =>
           rel="noopener noreferrer"
           alt="Twitter Link"
         >
-          <img src={logo} alt="twitter link" />
+          <img className="share-link" src={twitterLogo} alt="twitter link" />
         </a>
       </article>
     </article>

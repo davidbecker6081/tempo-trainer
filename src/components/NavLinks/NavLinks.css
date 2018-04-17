@@ -3,19 +3,25 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  margin-bottom: 2rem;
+  width: 96%;
+  border-bottom: 1px solid #FFFFFF;
 }
 
 .navlink {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 20px 0;
-  padding: 5px 0;
+  margin: 0 0 1em 0;
+  padding: 0.3em 0;
   width: 100%;
   text-decoration: none;
-  font-size: 1.3em;
+  font-size: 1.2em;
   letter-spacing: 1.1px;
+}
+
+.navlink:last-of-type {
+  margin-bottom: 2rem;
 }
 
 .navlink:hover {

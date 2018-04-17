@@ -55,13 +55,13 @@ export class GoogleMap extends Component {
   render() {
     const { dataHelper, originalRange } = this.props;
     const { range } = this.state;
-    const style = { height: '30vh', width: '75vw' };
+    const style = { height: '20vw', width: '45vw' };
     const rangeCoords = this.calculateGPSCoords(dataHelper, range);
     const originalCoords = this.calculateGPSCoords(dataHelper, originalRange);
     const { start: startMarker, finish: finishMarker } = this.constructMarkers(rangeCoords);
 
     return (
-      <div className="google-map">
+      <div className="google-map-container">
         <Map
           className="google-map"
           google={this.props.google}

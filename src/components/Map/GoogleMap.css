@@ -1,4 +1,17 @@
-.google-map {
-  width: 75vw;
+.google-map-container {
   height: 30vh;
+  /* padding-left: 15vw; */
+  width: 45vw;
+}
+
+.google-map {
+  height: 30vh;
+  width: 45vw;
+  overflow: hidden;
+}
+
+div.google-map {
+  height: 30vh;
+  width: 45vw;
+  overflow: hidden;
 }

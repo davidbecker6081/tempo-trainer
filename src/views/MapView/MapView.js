@@ -7,7 +7,8 @@ const MapView = ({ range, dataHelper, originalRange }) =>
   (
     <div>
       <GoogleApiWrapper
-        className="google-map-wrapper"
+        className="google-map-container"
+        style={{ position: 'static', height: '30vh', width: '45vw' }}
         range={range}
         dataHelper={dataHelper}
         originalRange={originalRange}
