@@ -1,7 +1,7 @@
 export default class DataCleaner {
   constructor(data) {
     this.originalData = data;
-    this.minuteData = this.filterByMinute(data.samples);
+    this.minuteData = this.filterByHalfMinute(data.samples);
     this.channels = data.channelSet;
     this.GPSCoords = this.filterGPSCoords();
   }
@@ -24,7 +24,7 @@ export default class DataCleaner {
     return GPSCoords;
   }
 
-  averageOfSet(channelSet, sampleSet = this.minuteData) {
+  averageOfSet(channelSet, sampleSet = this.originalData.samples) {
     const sum = sampleSet.reduce((sum, sample, i) => {
       sum += sample.values[channelSet] || 0;
       return sum;
@@ -34,14 +34,14 @@ export default class DataCleaner {
   }
 
   createChunk(chunkSize, index) {
-    return this.minuteData.slice(index, index + chunkSize);
+    return this.originalData.samples.slice(index, index + chunkSize);
   }
 
   createChunkSet(chunkSize) {
     const chunkSet = [];
     let j = 0;
 
-    for (let i = 0; i < this.minuteData.length; i++, j++) {
+    for (let i = 0; i < this.originalData.samples.length; i++, j++) {
       const chunk = this.createChunk(chunkSize, j);
       if (chunk.length === chunkSize) {
         chunkSet.push(chunk);
@@ -90,7 +90,7 @@ export default class DataCleaner {
     return rangeArray;
   }
 
-  calculateTotal(channelSet, rangeData = this.minuteData) {
+  calculateTotal(channelSet, rangeData = this.originalData.samples) {
     if (channelSet === 'millisecondOffset') {
       return rangeData.reduce((total, sample) => {
         total += sample[channelSet] || 0;
@@ -109,13 +109,15 @@ export default class DataCleaner {
   }
 
   calculateTotalElevationGain() {
-    return this.minuteData.reduce((gain, sample, i) => {
-      if (i < this.minuteData.length - 1) {
-        const difference = this.minuteData[i + 1].values.elevation - sample.values.elevation;
+    const { samples } = this.originalData;
+
+    return samples.reduce((gain, sample, i) => {
+      if (i < samples.length - 1) {
+        const difference = samples[i + 1].values.elevation - sample.values.elevation;
         gain += difference || 0;
       }
       return gain;
-    }, this.minuteData[0].values.elevation);
+    }, samples[0].values.elevation);
   }
 
   getMinMax() {
@@ -123,11 +125,12 @@ export default class DataCleaner {
     const endTime = this.minuteData[this.minuteData.length - 1].millisecondOffset;
     const startMinute = Math.round(this.convertMilliToMin(startTime));
     const endMinute = Math.round(this.convertMilliToMin(endTime));
+
     return [startMinute, endMinute];
   }
 
-  filterByMinute(data) {
-    return data.filter((sample, i) => sample.millisecondOffset % 60000 === 0);
+  filterByHalfMinute(data) {
+    return data.filter((sample, i) => sample.millisecondOffset % 30000 === 0);
   }
 
   filterDataForGraph(channelSet, range) {

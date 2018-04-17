@@ -26,7 +26,7 @@ export class GoogleMap extends Component {
         path={coords}
         strokeColor="#00FFBB"
         strokeOpacity={0.5}
-        strokeWeight={2}
+        strokeWeight={3}
       />
     );
   }
@@ -70,7 +70,7 @@ export class GoogleMap extends Component {
           path={originalCoords}
           strokeColor="#000000"
           strokeOpacity={0.8}
-          strokeWeight={2}
+          strokeWeight={3}
         />
         {this.createHighlightPolyline(GPSCoords)}
         <Marker
