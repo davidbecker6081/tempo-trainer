@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar name is defined should render correclty 1`] = `undefined`;
+
+exports[`Avatar userImage is defined should render correclty 1`] = `undefined`;

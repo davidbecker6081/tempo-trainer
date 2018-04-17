@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RangeSlider originalRange is defined should render correclty 1`] = `undefined`;
+
+exports[`RangeSlider range is defined should render correclty 1`] = `undefined`;

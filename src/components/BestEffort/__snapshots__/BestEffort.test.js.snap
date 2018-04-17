@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BestEffort channelSet is defined should render correclty 1`] = `undefined`;
+
+exports[`BestEffort effort is defined should render correclty 1`] = `undefined`;
+
+exports[`BestEffort timeForCalc is defined should render correclty 1`] = `undefined`;
+
+exports[`BestEffort timeRange is defined should render correclty 1`] = `undefined`;

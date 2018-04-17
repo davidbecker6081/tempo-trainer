@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BestEffortsView channelSet is defined should render correclty 1`] = `undefined`;
+
+exports[`BestEffortsView dataHelper is defined should render correclty 1`] = `undefined`;
