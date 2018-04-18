@@ -92,4 +92,8 @@ main {
   main {
     padding: 150px 0;
   }
+
+  .effort-average-container {
+    flex-direction: column;
+  }
 }

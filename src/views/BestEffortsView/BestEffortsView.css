@@ -1,3 +1,11 @@
 .best-efforts-view {
   width: 40%;
 }
+
+@media screen and (max-width: 770px) {
+  .best-efforts-view.container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}

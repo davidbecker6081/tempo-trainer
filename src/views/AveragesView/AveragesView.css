@@ -8,3 +8,16 @@
 .average-view h3 {
   margin-top: 0;
 }
+
+@media screen and (max-width: 770px) {
+  .averages-view {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .average-view h2 {
+    width: 100%;
+  }
+}
