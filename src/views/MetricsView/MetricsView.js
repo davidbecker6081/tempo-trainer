@@ -29,7 +29,6 @@ const MetricsView = ({
         <RangeSlider
           range={range}
           handleRangeChange={handleRangeChange}
-          dataHelper={dataHelper}
           originalRange={originalRange}
         />
       </article>

@@ -11,6 +11,10 @@ const RangeSlider = ({ originalRange, handleRangeChange, range }) => {
 
   return (
     <div>
+      <div className="current-range">
+        <p>Start: <span className="current-range-num">{range[0]}</span>min</p>
+        <p>End: <span className="current-range-num">{range[1]}</span>min</p>
+      </div>
       <Range
         min={min}
         max={max}

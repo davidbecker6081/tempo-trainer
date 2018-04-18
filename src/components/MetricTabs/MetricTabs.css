@@ -1,7 +1,7 @@
 .tab-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   width: 60vw;
 }
 
