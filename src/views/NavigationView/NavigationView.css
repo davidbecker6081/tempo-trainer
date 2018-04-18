@@ -43,7 +43,10 @@
 
 @media screen and (max-width: 770px) {
   .nav-wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
     height: auto;
+    padding: 20px;
     width: 100vw;
   }
 

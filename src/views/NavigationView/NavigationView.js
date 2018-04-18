@@ -43,7 +43,7 @@ class NavigationView extends Component {
         <Avatar user={user} />
         <button className={`menu-btn ${rotate}`} onClick={() => this.setState({ showMenu: !showMenu })} />
         <NavLinks display={display} />
-        <ShareLinks />
+        <ShareLinks display={display} />
       </header>
     );
   }

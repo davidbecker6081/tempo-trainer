@@ -40,5 +40,30 @@
 }
 
 @media screen and (max-width: 770px) {
+  .active {
+    display: flex;
+  }
 
+  .hide.share-links-container {
+    display: none;
+  }
+
+  .share-links-container {
+    width: 95%;
+  }
+
+  .share-links-container,
+  .share-links-wrapper {
+    flex-direction: row;
+    height: auto;
+  }
+
+  .share-links-logo {
+    margin: 0 10px;
+  }
+
+  .share-links-wrapper {
+    padding: 0;
+    width: 25%;
+  }
 }
