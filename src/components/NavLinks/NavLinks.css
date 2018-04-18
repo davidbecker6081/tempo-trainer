@@ -1,7 +1,7 @@
 .nav-links {
   margin-bottom: 2rem;
   width: 100%;
-  border-bottom: 5px solid #FFFFFF;
+  border-bottom: 5px solid #2D2D2D;;
 }
 
 .navlink {
@@ -11,9 +11,10 @@
   margin: 0 0 1em 0;
   padding: 0.3em 0;
   width: 100%;
-  text-decoration: none;
+  color: #2D2D2D;
   font-size: 1.2em;
   letter-spacing: 1.1px;
+  text-decoration: none;
 }
 
 .navlink:last-of-type {
@@ -28,5 +29,5 @@
 }
 
 .navlink:visited {
-  color: #FFFFFF;
+  color: #2D2D2D;
 }
