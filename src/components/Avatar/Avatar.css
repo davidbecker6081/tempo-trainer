@@ -13,3 +13,10 @@
   border-radius: 50%;
   opacity: 0.9;
 }
+
+.avatar img:hover,
+.avatar div:hover {
+  box-shadow: 0px 0px 2px 2px #4ee46f2b;
+  cursor: pointer;
+  opacity: 1;
+}
