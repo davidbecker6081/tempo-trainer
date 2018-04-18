@@ -1,6 +1,7 @@
 .metrics-view {
   padding: 0 2rem;
   width: 60vw;
+  border-radius: 2px;
 }
 
 .metrics-view-wrapper {

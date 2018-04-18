@@ -2,11 +2,12 @@
   margin-bottom: 4em;
   padding: 2rem 2rem 4rem 2rem;
   width: 60vw;
+  border-radius: 2px;
 }
 
 .google-map-wrapper {
   height: 30vh;
   width: 45vw;
   border: 2px solid #FFFFFF;
-  border-radius: 3px;
+  border-radius: 2px;
 }

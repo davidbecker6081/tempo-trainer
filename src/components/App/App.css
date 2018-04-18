@@ -11,23 +11,15 @@ h1 {
 }
 
 h2 {
-  color: #FFFFFF;
   font-size: 2em;
+  font-weight: 800;
+  letter-spacing: 1.1px;
 }
 
-.App {
-  display: flex;
-}
-
-main {
+.flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: 2vh 5vw 2vh 15vw;
-  width: 100%;
-  overflow: auto;
 }
 
 .container {
@@ -36,4 +28,24 @@ main {
   flex-direction: column;
   justify-content: center;
   background-color: #72C6E9;
+}
+
+.App {
+  display: flex;
+}
+
+main {
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2vh 5vw 2vh 15vw;
+  width: 100%;
+  overflow: auto;
+}
+
+.effort-average-container {
+  justify-content: space-around;
+  padding: 2rem;
+  width: 60vw;
+  background-color: #72C6E9;
+  border-radius: 2px;
 }

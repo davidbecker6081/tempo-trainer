@@ -53,7 +53,7 @@ class App extends Component {
           to="/"
           render={() =>
             (
-              <main>
+              <main className="flex-center">
                 <MetricsView
                   range={range}
                   handleRangeChange={this.handleRangeChange}
@@ -67,13 +67,15 @@ class App extends Component {
                   dataHelper={this.dataHelper}
                   originalRange={originalRange}
                 />
-                <BestEffortsView
-                  dataHelper={this.dataHelper}
-                  channelSet={channelSet}
-                />
-                <AveragesView
-                  dataHelper={this.dataHelper}
-                />
+                <section className="effort-average-container flex-center">
+                  <BestEffortsView
+                    dataHelper={this.dataHelper}
+                    channelSet={channelSet}
+                  />
+                  <AveragesView
+                    dataHelper={this.dataHelper}
+                  />
+                </section>
                 <TotalsView
                   dataHelper={this.dataHelper}
                 />
