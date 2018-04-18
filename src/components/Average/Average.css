@@ -42,3 +42,10 @@
     width: 45%;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .average {
+    margin-right: 0;
+    width: 100%;
+  }
+}

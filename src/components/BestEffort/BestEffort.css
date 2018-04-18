@@ -35,3 +35,9 @@
     margin-right: 10px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .best-effort {
+    width: 100%;
+  }
+}

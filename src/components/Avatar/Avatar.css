@@ -49,3 +49,10 @@
     margin-right: 10px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .avatar.container {
+    margin-right: 0;
+    width: 90%;
+  }
+}

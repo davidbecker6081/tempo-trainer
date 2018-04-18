@@ -9,3 +9,9 @@
 .totals-wrapper {
   width: 100%;
 }
+
+@media screen and (max-width: 770px) {
+  .totals-wrapper {
+    flex-direction: column;
+  }
+}

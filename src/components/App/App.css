@@ -97,3 +97,9 @@ main {
     flex-direction: column;
   }
 }
+
+@media screen and (max-width: 500px) {
+  main {
+    padding: 215px 0;
+  }
+}
