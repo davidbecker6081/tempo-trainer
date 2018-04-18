@@ -14,7 +14,7 @@ const MetricsView = ({
   originalRange,
 }) =>
   (
-    <section className="metrics-view-container">
+    <section className="container metrics-view">
       <h2>Metrics</h2>
       <article className="metrics-view-wrapper">
         <MetricTabs

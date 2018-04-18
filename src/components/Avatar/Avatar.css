@@ -1,15 +1,12 @@
-.avatar-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 2rem;
+.avatar {
   padding: 1rem;
+  margin-bottom: 2rem;
+  width: 85%;
   border-bottom: 5px solid #FFFFFF;
   letter-spacing: 1.1px;
 }
 
-.avatar-container img {
+.avatar img {
   height: 10rem;
   width: 10rem;
   border: 10px solid #FFFFFF;

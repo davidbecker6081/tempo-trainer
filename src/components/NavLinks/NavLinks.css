@@ -1,8 +1,4 @@
-.navlinks-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
+.nav-links {
   margin-bottom: 2rem;
   width: 100%;
   border-bottom: 5px solid #FFFFFF;

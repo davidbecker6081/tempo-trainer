@@ -1,12 +1,6 @@
-.metrics-view-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 4em;
+.metrics-view {
   padding: 0 2rem;
   width: 60vw;
-  background-color: #72C6E9;
 }
 
 .metrics-view-wrapper {

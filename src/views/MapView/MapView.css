@@ -1,12 +1,7 @@
-.map-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
+.map-view {
   margin-bottom: 4em;
-  padding: 2rem;
+  padding: 2rem 2rem 4rem 2rem;
   width: 60vw;
-  background-color: #72C6E9;
 }
 
 .google-map-wrapper {

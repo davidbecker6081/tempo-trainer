@@ -5,7 +5,7 @@ import './MapView.css';
 
 const MapView = ({ range, dataHelper, originalRange }) =>
   (
-    <section className="map-container">
+    <section className="container map-view">
       <h2>Your Run</h2>
       <GoogleApiWrapper
         className="google-map-wrapper"

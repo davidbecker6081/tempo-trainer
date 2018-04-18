@@ -4,7 +4,7 @@ import './NavLinks.css';
 
 const NavLinks = () =>
   (
-    <nav className="navlinks-container">
+    <nav className="container nav-links">
       <NavLink to="/" className="navlink">Dashboard</NavLink>
       <NavLink to="/" className="navlink">Calendar</NavLink>
       <NavLink to="/" className="navlink">Nutrition</NavLink>
