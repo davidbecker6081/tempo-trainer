@@ -9,3 +9,54 @@
   box-shadow: 0px 0px 1px 1px #4ee46f1a;
   z-index: 9999;
 }
+
+.menu-btn {
+  display: none;
+  height: 100px;
+  width: 100px;
+  background: none;
+  border: none;
+  background-image: url('../../assets/menu-button-white.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  transform: rotate(-90deg);
+  transition: 0.5s;
+}
+
+.rotate-menu {
+  animation-name: rotate;
+  animation-duration: 0.5s;
+  transform: rotate(180deg);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-90deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .nav-wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 5px;
+    width: 99vw;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav-wrapper {
+    justify-content: center;
+  }
+}

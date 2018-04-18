@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-right: 1rem;
   padding: 15px;
   width: 25%;
   background-color: #252525;
@@ -24,4 +25,22 @@
 .total p {
   font-size: 1.2em;
   font-weight: 700;
+}
+
+@media screen and (max-width: 1150px) {
+  .total {
+    font-size: 1.1em;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .total {
+    margin: 0 0 10px 0;
+    width: 100%;
+    font-size: 2em;
+  }
+
+  .total h4 {
+    font-size: 1.1em;
+  }
 }

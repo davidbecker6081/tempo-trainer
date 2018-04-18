@@ -31,3 +31,39 @@
   border-radius: 50%;
   opacity: 1;
 }
+
+@media screen and (max-width: 1150px) {
+  .share-links-wrapper {
+    flex-direction: column;
+    height: 20vh;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .active {
+    display: flex;
+  }
+
+  .hide.share-links-container {
+    display: none;
+  }
+
+  .share-links-container {
+    width: 95%;
+  }
+
+  .share-links-container,
+  .share-links-wrapper {
+    flex-direction: row;
+    height: auto;
+  }
+
+  .share-links-logo {
+    margin: 0 10px;
+  }
+
+  .share-links-wrapper {
+    padding: 0;
+    width: 35%;
+  }
+}

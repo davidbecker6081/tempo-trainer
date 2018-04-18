@@ -28,3 +28,16 @@
   font-size: 1.3em;
   font-weight: 700;
 }
+
+@media screen and (max-width: 770px) {
+  .best-effort {
+    width: 45%;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .best-effort {
+    width: 100%;
+  }
+}

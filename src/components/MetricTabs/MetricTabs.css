@@ -26,3 +26,27 @@
   color: #181818;
   cursor: default;
 }
+
+@media screen and (max-width: 770px) {
+  .tab-container {
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    margin-bottom: 20px;
+    width: 30%;
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .tab-container {
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    margin-bottom: 20px;
+    width: 48%;
+    font-size: 1.5em;
+  }
+}
