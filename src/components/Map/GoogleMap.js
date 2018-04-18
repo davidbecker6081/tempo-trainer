@@ -55,7 +55,7 @@ export class GoogleMap extends Component {
   render() {
     const { dataHelper, originalRange } = this.props;
     const { range } = this.state;
-    const style = { height: '20vw', width: '45vw' };
+    const style = { height: '35vh', width: '55vw' };
     const rangeCoords = this.calculateGPSCoords(dataHelper, range);
     const originalCoords = this.calculateGPSCoords(dataHelper, originalRange);
     const { start: startMarker, finish: finishMarker } = this.constructMarkers(rangeCoords);

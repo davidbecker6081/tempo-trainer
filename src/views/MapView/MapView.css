@@ -1,5 +1,17 @@
-.google-map-container {
-  /* padding-left: 15vw; */
+.map-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 4em;
+  padding: 2rem;
+  width: 60vw;
+  background-color: #72C6E9;
+}
+
+.google-map-wrapper {
   height: 30vh;
   width: 45vw;
+  border: 2px solid #FFFFFF;
+  border-radius: 3px;
 }

@@ -5,15 +5,16 @@ import './MapView.css';
 
 const MapView = ({ range, dataHelper, originalRange }) =>
   (
-    <div>
+    <section className="map-container">
+      <h2>Your Run</h2>
       <GoogleApiWrapper
-        className="google-map-container"
+        className="google-map-wrapper"
         style={{ position: 'static', height: '30vh', width: '45vw' }}
         range={range}
         dataHelper={dataHelper}
         originalRange={originalRange}
       />
-    </div>
+    </section>
   );
 
 export default MapView;
