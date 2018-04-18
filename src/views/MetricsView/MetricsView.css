@@ -1,0 +1,21 @@
+.metrics-view-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+  width: 60vw;
+  background-color: #72C6E9;
+}
+
+h2 {
+  color: #FFFFFF;
+  font-size: 2em;
+}
+
+.metrics-view-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

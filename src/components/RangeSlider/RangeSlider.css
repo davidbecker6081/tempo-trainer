@@ -1,0 +1,10 @@
+.rc-slider-rail,
+.rc-slider-track,
+.rc-slider-step {
+  height: 20px;
+}
+
+.rc-slider-handle {
+  height: 30px;
+  width: 30px;
+}

@@ -4,8 +4,8 @@
   flex-direction: column;
   justify-content: center;
   margin-bottom: 2rem;
-  width: 96%;
-  border-bottom: 1px solid #FFFFFF;
+  width: 100%;
+  border-bottom: 5px solid #FFFFFF;
 }
 
 .navlink {
@@ -27,7 +27,6 @@
 .navlink:hover {
   background: linear-gradient(90deg, #b8dae9b3, rgba(144, 227, 255, 0.15));
   border-radius: 1px;
-  /* color: #72C6E9; */
   cursor: pointer;
   transition: 1s;
 }

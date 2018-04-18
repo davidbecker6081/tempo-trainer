@@ -5,9 +5,9 @@ import './Graph.css';
 
 const Graph = ({ dataHelper, range, channelSet }) => {
   const data = dataHelper.filterDataForGraph(channelSet, range);
-  // const tickValues = data.filter(point => range[range.length - 1] / 10;
+
   return (
-    <div>
+    <article className="graph-container">
       <VictoryChart theme={VictoryTheme.material}>
         <VictoryArea
           style={{ data: { fill: '#72C6E9' } }}
@@ -17,7 +17,7 @@ const Graph = ({ dataHelper, range, channelSet }) => {
           y={channelSet}
         />
       </VictoryChart>
-    </div>
+    </article>
   );
 };
 

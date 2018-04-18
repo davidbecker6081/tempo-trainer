@@ -7,7 +7,7 @@ import './RangeSlider.css';
 const RangeSlider = ({ originalRange, handleRangeChange, range }) => {
   const min = originalRange[0];
   const max = originalRange[1];
-  const style = { width: '50vw', height: '10vh' };
+  const style = { width: '50vw', height: '5vh' };
 
   return (
     <div>
