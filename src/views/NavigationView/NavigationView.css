@@ -46,8 +46,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     height: auto;
-    padding: 20px;
-    width: 100vw;
+    padding: 5px;
+    width: 99vw;
   }
 
   .menu-btn {
