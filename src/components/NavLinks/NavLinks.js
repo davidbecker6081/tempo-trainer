@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './NavLinks.css';
 
 const NavLinks = () =>
   (
-    <nav>
-      <Link to="/">Dashboard</Link>
-      <Link to="/">Calendar</Link>
-      <Link to="/">Nutrition</Link>
-      <Link to="/">Goals</Link>
-      <Link to="/">Notes</Link>
-      <Link to="/">Settings</Link>
-      <Link to="/">Account</Link>
+    <nav className="container nav-links">
+      <NavLink to="/" className="navlink">Dashboard</NavLink>
+      <NavLink to="/" className="navlink">Calendar</NavLink>
+      <NavLink to="/" className="navlink">Nutrition</NavLink>
+      <NavLink to="/" className="navlink">Goals</NavLink>
+      <NavLink to="/" className="navlink">Notes</NavLink>
+      <NavLink to="/" className="navlink">Settings</NavLink>
+      <NavLink to="/" className="navlink">Account</NavLink>
     </nav>
   );
 

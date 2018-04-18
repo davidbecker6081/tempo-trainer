@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GoogleApiWrapper from '../../components/Map/GoogleMap';
+import './MapView.css';
 
 const MapView = ({ range, dataHelper, originalRange }) =>
   (
-    <div>
-      <GoogleApiWrapper range={range} dataHelper={dataHelper} originalRange={originalRange} />
-    </div>
+    <section className="container map-view">
+      <h2>Your Run</h2>
+      <GoogleApiWrapper
+        className="google-map-wrapper"
+        style={{ position: 'static', height: '30vh', width: '45vw' }}
+        range={range}
+        dataHelper={dataHelper}
+        originalRange={originalRange}
+      />
+    </section>
   );
 
 export default MapView;

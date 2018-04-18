@@ -1,0 +1,13 @@
+.metrics-view {
+  margin-bottom: 4rem;
+  padding: 2rem 2rem 0 2rem;
+  width: 60vw;
+  border-radius: 5px;
+}
+
+.metrics-view-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

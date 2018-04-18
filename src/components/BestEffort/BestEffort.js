@@ -23,12 +23,16 @@ const BestEffort = ({
   };
 
   return (
-    <article>
-      <p>Best <span>{timeForCalc}</span> Minute</p>
-      <p>{channelSet.toUpperCase()}</p>
-      <p>Average</p>
-      <p>{effortCleaner[channelSet]}</p>
-      <p>Minute {timeCleaner.low} to Minute {timeCleaner.high}</p>
+    <article className="flex-center best-effort">
+      <div className="best-effort-title flex-center">
+        <p>{timeForCalc} Minute</p>
+        <p className="best-effort-average">{effortCleaner[channelSet]}</p>
+      </div>
+      <div className="best-effort-timerange flex-center">
+        <p>Minute {timeCleaner.low}</p>
+        <p>to</p>
+        <p>Minute {timeCleaner.high}</p>
+      </div>
     </article>
   );
 };

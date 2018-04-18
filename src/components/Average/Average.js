@@ -14,7 +14,7 @@ const Average = ({ channelSet, dataHelper }) => {
   };
 
   return (
-    <article>
+    <article className="average">
       <h4>{channelSet.toUpperCase()}</h4>
       <p>{averageCleaner[channelSet]}</p>
     </article>

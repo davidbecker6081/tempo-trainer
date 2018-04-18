@@ -1,28 +1,67 @@
-.App {
+/* STYLE GUIDE - COLORS ---------------------------------------------- */
+/* Main Background - #252525 */
+/* Container Background - #303032 */
+/* Base Card Background - #252525 */
+/* Dark Card Text - #FFFFFF */
+/* Title / Highlight - #4EE46F */
+/* Box-shadow1 - box-shadow: 0px 0px 2px 2px #4ee46f2b; */
+/* Box-shadow2 - box-shadow: 0px 0px 2px 2px #25252563; */
+/* Text on Card2 - #181818 */
+/* -------------------------------------------------------------------- */
+
+* {
+  font-family: 'Jura', sans-serif;
+  font-size: 1em;
+}
+
+h1 {
+  margin: 0;
+  color: #FFFFFF;
+  font-size: 3em;
+  font-weight: 700;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+h2 {
+  margin-top: 0;
+  color: #FFFFFF;
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 1.1px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.App-title {
-  font-size: 1.5em;
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #303032;
 }
 
-.App-intro {
-  font-size: large;
+.App {
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+main {
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2vh 5vw 2vh 15vw;
+  width: 100%;
+  background-color: #252525;
+  overflow: auto;
+}
+
+.effort-average-container {
+  justify-content: space-around;
+  padding: 2rem;
+  margin-bottom: 4rem;
+  width: 60vw;
+  background-color: #303032;
+  border-radius: 2px;
 }

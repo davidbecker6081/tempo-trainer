@@ -13,7 +13,8 @@ const BestEffortsView = ({ channelSet, dataHelper }) => {
   };
 
   return (
-    <section>
+    <section className="container best-efforts-view">
+      <h2>Best Effort: {channelSet.toUpperCase()}</h2>
       <BestEffort
         channelSet={channelSet}
         timeForCalc={1}

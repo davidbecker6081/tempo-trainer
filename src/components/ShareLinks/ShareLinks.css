@@ -1,10 +1,33 @@
 .share-links-container {
-  height: 400px;
-  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  width: 86%;
 }
 
-.share-links-logo,
-.share-links-container img {
-  height: 50px;
-  width: 50px;
+.share-links-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.share-links-logo {
+  height: 7rem;
+  margin-bottom: 2.5rem;
+  width: 7rem;
+}
+
+.share-link {
+  height: 3.5rem;
+  width: 3.5rem;
+  opacity: 0.8;
+}
+
+.share-link:hover {
+  box-shadow: 0px 0px 2px 2px #4ee46f87;
+  border-radius: 50%;
+  opacity: 1;
 }

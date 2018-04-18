@@ -7,10 +7,14 @@ import './RangeSlider.css';
 const RangeSlider = ({ originalRange, handleRangeChange, range }) => {
   const min = originalRange[0];
   const max = originalRange[1];
-  const style = { width: '50vw', height: '10vh' };
+  const style = { width: '50vw', height: '5vh' };
 
   return (
     <div>
+      <div className="current-range">
+        <p>Start: <span className="current-range-num">{range[0]}</span>min</p>
+        <p>End: <span className="current-range-num">{range[1]}</span>min</p>
+      </div>
       <Range
         min={min}
         max={max}

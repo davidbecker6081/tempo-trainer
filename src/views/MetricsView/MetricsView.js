@@ -14,22 +14,25 @@ const MetricsView = ({
   originalRange,
 }) =>
   (
-    <div>
-      <MetricTabs
-        handleChannelChange={handleChannelChange}
-      />
-      <Graph
-        range={range}
-        dataHelper={dataHelper}
-        channelSet={channelSet}
-      />
-      <RangeSlider
-        range={range}
-        handleRangeChange={handleRangeChange}
-        dataHelper={dataHelper}
-        originalRange={originalRange}
-      />
-    </div>
+    <section className="container metrics-view">
+      <h2>Metrics</h2>
+      <article className="metrics-view-wrapper">
+        <MetricTabs
+          handleChannelChange={handleChannelChange}
+          channelSet={channelSet}
+        />
+        <Graph
+          range={range}
+          dataHelper={dataHelper}
+          channelSet={channelSet}
+        />
+        <RangeSlider
+          range={range}
+          handleRangeChange={handleRangeChange}
+          originalRange={originalRange}
+        />
+      </article>
+    </section>
   );
 
 export default MetricsView;

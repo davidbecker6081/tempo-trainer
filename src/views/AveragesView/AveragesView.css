@@ -1,0 +1,10 @@
+.averages-view {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 25%;
+}
+
+.average-view h3 {
+  margin-top: 0;
+}

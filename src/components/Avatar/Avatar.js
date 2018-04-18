@@ -7,7 +7,7 @@ const Avatar = ({ user }) => {
   const userImage = user.profileImg;
 
   return (
-    <article>
+    <article className="container avatar">
       <img src={userImage} alt="user profile" />
       <h1>{name}</h1>
     </article>

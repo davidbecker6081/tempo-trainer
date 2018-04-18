@@ -5,7 +5,8 @@ import './AveragesView.css';
 
 const AveragesView = ({ dataHelper }) =>
   (
-    <section>
+    <section className="averages-view">
+      <h2>Averages</h2>
       <Average dataHelper={dataHelper} channelSet="power" />
       <Average dataHelper={dataHelper} channelSet="heartRate" />
       <Average dataHelper={dataHelper} channelSet="cadence" />

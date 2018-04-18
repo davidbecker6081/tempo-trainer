@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
 import API_KEYS from '../../api-keys';
+import './GoogleMap.css';
 
 export class GoogleMap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -24,8 +25,8 @@ export class GoogleMap extends Component {
     return (
       <Polyline
         path={coords}
-        strokeColor="#00FFBB"
-        strokeOpacity={0.5}
+        strokeColor="#4EE46F"
+        strokeOpacity={1}
         strokeWeight={3}
       />
     );
@@ -54,43 +55,45 @@ export class GoogleMap extends Component {
   render() {
     const { dataHelper, originalRange } = this.props;
     const { range } = this.state;
-    const style = { height: '50%', width: '50%' };
+    const style = { height: '35vh', width: '55vw' };
     const rangeCoords = this.calculateGPSCoords(dataHelper, range);
     const originalCoords = this.calculateGPSCoords(dataHelper, originalRange);
     const { start: startMarker, finish: finishMarker } = this.constructMarkers(rangeCoords);
 
     return (
-      <Map
-        google={this.props.google}
-        onReady={() => console.log('ready')}
-        zoom={12}
-        style={style}
-        initialCenter={{
-            lat: originalCoords[0].lat,
-            lng: originalCoords[0].lng,
-        }}
-      >
-
-        <Marker
-          title={`${range[0]}`}
-          onClick={this.onMarkerClick}
-          name="Current location"
-          position={{ lat: startMarker.lat, lng: startMarker.lng }}
-        />
-        <Polyline
-          path={originalCoords}
-          strokeColor="#000000"
-          strokeOpacity={0.8}
-          strokeWeight={3}
-        />
-        {this.createHighlightPolyline(rangeCoords)}
-        <Marker
-          title={`${range[1]}`}
-          onClick={this.onMarkerClick}
-          name="Past location"
-          position={{ lat: finishMarker.lat, lng: finishMarker.lng }}
-        />
-      </Map>
+      <div className="google-map-container">
+        <Map
+          className="google-map"
+          google={this.props.google}
+          onReady={() => console.log('ready')}
+          zoom={12}
+          style={style}
+          initialCenter={{
+            lat: originalCoords[Math.round(originalCoords.length / 6)].lat,
+            lng: originalCoords[Math.round(originalCoords.length / 6)].lng,
+          }}
+        >
+          <Marker
+            title={`${range[0]}`}
+            onClick={this.onMarkerClick}
+            name="Current location"
+            position={{ lat: startMarker.lat, lng: startMarker.lng }}
+          />
+          <Polyline
+            path={originalCoords}
+            strokeColor="#252525"
+            strokeOpacity={0.8}
+            strokeWeight={3}
+          />
+          {this.createHighlightPolyline(rangeCoords)}
+          <Marker
+            title={`${range[1]}`}
+            onClick={this.onMarkerClick}
+            name="Past location"
+            position={{ lat: finishMarker.lat, lng: finishMarker.lng }}
+          />
+        </Map>
+      </div>
     );
   }
 }
