@@ -41,7 +41,7 @@ class NavigationView extends Component {
     return (
       <header className="nav-wrapper">
         <Avatar user={user} />
-        <button className="menu-btn" onClick={() => this.setState({ showMenu: !showMenu })} />
+        <button className={`menu-btn ${rotate}`} onClick={() => this.setState({ showMenu: !showMenu })} />
         <NavLinks display={display} />
         <ShareLinks />
       </header>

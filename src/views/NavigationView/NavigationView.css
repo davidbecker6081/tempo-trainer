@@ -21,7 +21,24 @@
   background-repeat: no-repeat;
   cursor: pointer;
   outline: none;
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
+  transition: 0.5s;
+}
+
+.rotate-menu {
+  animation-name: rotate;
+  animation-duration: 0.5s;
+  transform: rotate(180deg);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-90deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
 }
 
 @media screen and (max-width: 770px) {
