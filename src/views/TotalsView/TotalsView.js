@@ -5,10 +5,13 @@ import './TotalsView.css';
 
 const TotalsView = ({ dataHelper }) =>
   (
-    <section>
-      <Total dataHelper={dataHelper} channelSet="millisecondOffset" />
-      <Total dataHelper={dataHelper} channelSet="distance" />
-      <Total dataHelper={dataHelper} channelSet="elevation" />
+    <section className="flex-center totals-view">
+      <h2>Totals</h2>
+      <div className="totals-wrapper flex-center">
+        <Total dataHelper={dataHelper} channelSet="millisecondOffset" />
+        <Total dataHelper={dataHelper} channelSet="distance" />
+        <Total dataHelper={dataHelper} channelSet="elevation" />
+      </div>
     </section>
   );
 

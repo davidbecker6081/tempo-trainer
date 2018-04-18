@@ -11,6 +11,7 @@ h1 {
 }
 
 h2 {
+  margin-top: 0;
   font-size: 2em;
   font-weight: 800;
   letter-spacing: 1.1px;
@@ -45,6 +46,7 @@ main {
 .effort-average-container {
   justify-content: space-around;
   padding: 2rem;
+  margin-bottom: 4rem;
   width: 60vw;
   background-color: #72C6E9;
   border-radius: 2px;

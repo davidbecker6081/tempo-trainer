@@ -23,7 +23,7 @@ const Total = ({ channelSet, dataHelper }) => {
   };
 
   return (
-    <article>
+    <article className="total">
       <h4>
         {channelCleaner[channelSet].toUpperCase()}
       </h4>
