@@ -1,21 +1,32 @@
+/* STYLE GUIDE - COLORS ---------------------------------------------- */
+/* Main Background - #252525 */
+/* Container Background - #303032 */
+/* Base Card Background - #252525 */
+/* Dark Card Text - #FFFFFF */
+/* Title / Highlight - #4EE46F */
+/* Box-shadow1 - box-shadow: 0px 0px 2px 2px #4ee46f2b; */
+/* Box-shadow2 - box-shadow: 0px 0px 2px 2px #25252563; */
+/* Text on Card2 - #181818 */
+/* -------------------------------------------------------------------- */
+
 * {
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Jura', sans-serif;
   font-size: 1em;
 }
 
 h1 {
   margin: 0;
-  color: #2D2D2D;
+  color: #FFFFFF;
   font-size: 3em;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
 }
 
 h2 {
   margin-top: 0;
-  color: #2D2D2D;
+  color: #FFFFFF;
   font-size: 2em;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 1.1px;
 }
 
@@ -30,7 +41,7 @@ h2 {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: #72C6E9;
+  background-color: #303032;
 }
 
 .App {
@@ -42,6 +53,7 @@ main {
   min-height: 100vh;
   padding: 2vh 5vw 2vh 15vw;
   width: 100%;
+  background-color: #252525;
   overflow: auto;
 }
 
@@ -50,6 +62,6 @@ main {
   padding: 2rem;
   margin-bottom: 4rem;
   width: 60vw;
-  background-color: #72C6E9;
+  background-color: #303032;
   border-radius: 2px;
 }

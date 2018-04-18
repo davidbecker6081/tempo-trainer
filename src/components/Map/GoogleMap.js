@@ -25,8 +25,8 @@ export class GoogleMap extends Component {
     return (
       <Polyline
         path={coords}
-        strokeColor="#00FFBB"
-        strokeOpacity={0.5}
+        strokeColor="#4EE46F"
+        strokeOpacity={1}
         strokeWeight={3}
       />
     );
@@ -69,8 +69,8 @@ export class GoogleMap extends Component {
           zoom={12}
           style={style}
           initialCenter={{
-            lat: originalCoords[0].lat,
-            lng: originalCoords[0].lng,
+            lat: originalCoords[Math.round(originalCoords.length / 6)].lat,
+            lng: originalCoords[Math.round(originalCoords.length / 6)].lng,
           }}
         >
           <Marker
@@ -81,7 +81,7 @@ export class GoogleMap extends Component {
           />
           <Polyline
             path={originalCoords}
-            strokeColor="#000000"
+            strokeColor="#252525"
             strokeOpacity={0.8}
             strokeWeight={3}
           />

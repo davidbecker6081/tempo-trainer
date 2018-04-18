@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from '../../assets/pocket-watch.png';
-import facebookLogo from '../../assets/facebook-circular-logo.svg';
+import facebookLogo from '../../assets/facebook-logo-button.svg';
 import instagramLogo from '../../assets/instagram-logo.svg';
-import twitterLogo from '../../assets/twitter.svg';
+import twitterLogo from '../../assets/twitter-logo-button.svg';
 import './ShareLinks.css';
 
 const ShareLinks = () =>
