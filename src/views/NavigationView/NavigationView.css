@@ -9,3 +9,28 @@
   box-shadow: 0px 0px 1px 1px #4ee46f1a;
   z-index: 9999;
 }
+
+.menu-btn {
+  display: none;
+  height: 100px;
+  width: 100px;
+  background: none;
+  border: none;
+  background-image: url('../../assets/menu-button-white.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  transform: rotate(90deg);
+}
+
+@media screen and (max-width: 770px) {
+  .nav-wrapper {
+    height: auto;
+    width: 100vw;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}

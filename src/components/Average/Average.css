@@ -25,3 +25,17 @@
 .average h4 {
   margin: 15px 0;
 }
+
+@media screen and (max-width: 1150px) {
+  .average h4 {
+    font-size: 0.9em;
+  }
+
+  .average p {
+    font-size: 1.7em;
+  }
+}
+
+@media screen and (max-width: 770px) {
+
+}

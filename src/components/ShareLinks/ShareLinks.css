@@ -31,3 +31,14 @@
   border-radius: 50%;
   opacity: 1;
 }
+
+@media screen and (max-width: 1150px) {
+  .share-links-wrapper {
+    flex-direction: column;
+    height: 20vh;
+  }
+}
+
+@media screen and (max-width: 770px) {
+
+}

@@ -1,6 +1,6 @@
 .nav-links {
   margin-bottom: 2rem;
-  width: 100%;
+  width: 97%;
   border-bottom: 1px solid #4ee46f40;
 }
 
@@ -33,4 +33,21 @@
   color: #4EE46F;
   cursor: pointer;
   transition: 1s;
+}
+
+
+@media screen and (max-width: 1150px) {
+  .navlink {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .active {
+    display: flex;
+  }
+
+  .hide {
+    display: none;
+  }
 }

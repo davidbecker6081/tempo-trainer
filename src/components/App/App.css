@@ -65,3 +65,27 @@ main {
   background-color: #303032;
   border-radius: 5px;
 }
+
+.active {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (max-width: 1150px) {
+  * {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .App {
+    flex-direction: column;
+  }
+}
