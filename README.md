@@ -63,8 +63,6 @@ Please submit your test as an emailed zip file or link to a private repo or priv
 ##### NPM install
   - ```npm install```
 
-  - NOTE: Due to node_module google-maps-react having some issues, the map might be off, including range highlight, and styling issues
-
 ##### NPM start
   - ```npm start```
 

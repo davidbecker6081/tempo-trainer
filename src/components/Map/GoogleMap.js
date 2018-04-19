@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react-db';
 import API_KEYS from '../../api-keys';
 import './GoogleMap.css';
 
