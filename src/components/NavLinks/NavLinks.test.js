@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import MetricTabs from './MetricTabs';
+import NavLinks from './NavLinks';
 
-describe('MetricTabs', () => {
+describe('NavLinks', () => {
   let wrapper;
   let mockProps;
 
   beforeEach(() => {
     mockProps = {
-      handleChannelChange: () => {},
-      channelSet: '',
+      display: '',
     };
   });
 

@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import MetricTabs from './MetricTabs';
+import ShareLinks from './ShareLinks';
 
-describe('MetricTabs', () => {
+describe('ShareLinks', () => {
   let wrapper;
   let mockProps;
 
   beforeEach(() => {
     mockProps = {
-      handleChannelChange: () => {},
-      channelSet: '',
+      display: '',
     };
   });
 

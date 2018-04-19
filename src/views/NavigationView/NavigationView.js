@@ -3,7 +3,6 @@ import Avatar from '../../components/Avatar/Avatar';
 import NavLinks from '../../components/NavLinks/NavLinks';
 import ShareLinks from '../../components/ShareLinks/ShareLinks';
 import profileShot from '../../assets/j_lucas_profile.png';
-import menuButton from '../../assets/menu-button-white.svg';
 import './NavigationView.css';
 
 class NavigationView extends Component {

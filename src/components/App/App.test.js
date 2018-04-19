@@ -10,29 +10,13 @@ describe('App', () => {
   beforeEach(() => {
     wrapper = shallow(<App />);
     mockState = {
-      range: [],
+      range: [0, 85],
       channelSet: '',
-      originalRange: [],
+      originalRange: [0, 86],
     };
   });
 
-  it('renders without crashing', () => {
-    expect(wrapper).toBeDefined();
-  });
-  describe('range is defined', () => {
-    beforeEach(() => { mockState.range = [0, 86]; });
-
-    it('should render correctly', () => {
-      wrapper.setState(mockState);
-      expect(wrapper.update()).toMatchSnapshot();
-    });
-  });
-  describe('originalRange is defined', () => {
-    beforeEach(() => { mockState.originalRange = [0, 86]; });
-
-    it('should render correctly', () => {
-      wrapper.setState(mockState);
-      expect(wrapper.update()).toMatchSnapshot();
-    });
+  it('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

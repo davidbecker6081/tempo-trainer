@@ -28,4 +28,5 @@ export default MetricTabs;
 
 MetricTabs.propTypes = {
   handleChannelChange: PropTypes.func.isRequired,
+  channelSet: PropTypes.string.isRequired,
 };
