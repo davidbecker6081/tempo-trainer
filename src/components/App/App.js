@@ -54,6 +54,7 @@ class App extends Component {
           render={() =>
             (
               <main className="flex-center">
+                <h1 className="tempo-trainer">TEMPO TRAINER</h1>
                 <MetricsView
                   range={range}
                   handleRangeChange={this.handleRangeChange}

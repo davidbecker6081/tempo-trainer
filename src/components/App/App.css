@@ -10,14 +10,14 @@
 /* -------------------------------------------------------------------- */
 
 * {
-  font-family: 'Jura', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 1em;
 }
 
 h1 {
   margin: 0;
   color: #FFFFFF;
-  font-size: 3em;
+  font-size: 2em;
   font-weight: 700;
   text-align: center;
 }
@@ -28,6 +28,12 @@ h2 {
   font-size: 2em;
   font-weight: 700;
   letter-spacing: 1.1px;
+}
+
+.tempo-trainer {
+  color: #4EE46F;
+  font-family: 'Racing Sans One', cursive;
+  font-size: 5em;
 }
 
 .flex-center {
@@ -86,7 +92,7 @@ main {
   }
 
   h1 {
-    font-size: 2.8em;
+    font-size: 2.5em;
   }
 
   main {

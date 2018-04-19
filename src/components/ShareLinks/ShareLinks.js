@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import logo from '../../assets/pocket-watch.png';
 import facebookLogo from '../../assets/facebook-logo-button.svg';
 import instagramLogo from '../../assets/instagram-logo.svg';
 import twitterLogo from '../../assets/twitter-logo-button.svg';
@@ -9,7 +8,6 @@ import './ShareLinks.css';
 const ShareLinks = ({ display }) =>
   (
     <article className={`share-links-container ${display}`}>
-      <img className="share-links-logo" src={logo} alt="Tempo Trainer Logo" />
       <article className="share-links-wrapper">
         <a
           href="https://www.facebook.com"

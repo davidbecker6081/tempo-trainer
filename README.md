@@ -1,6 +1,18 @@
-# Peaksware Javascript Code Test
+# TempoTrainer
+An application for going the distance
 
+## Peaksware Javascript Code Test
 Please build a single page application to visualize the workout data provided in `workout-data.json`, including a map, a graph, and an algorithm to analyze average power output.
+
+![TempoTrainer](https://media.giphy.com/media/9V8ZkuICDzKexvMQEk/giphy.gif)
+
+## Wireframes
+
+#### Desktop
+![TempoTrainer-Desktop](./src/assets/1-Homepage.png)
+
+#### Mobile
+![TempoTrainer-Mobile](./src/assets/2-Mobile.png)
 
 ## Algorithm
 - Write the most efficient method that finds the "best" 20 minute power effort.
@@ -9,7 +21,6 @@ Please build a single page application to visualize the workout data provided in
 ## User Interface
 - Display the gps path on a Map
 - Display the power output over time on a graph, using time as the X axis
-- Display heartRate, cadence, power, temperature, elevation, distance, speed, positionLat, positionLong
 - When user selects a range of time on the graph, highlight the corresponding range on the map
 - Display the 1, 5, 10, 15, and 20 minute "best" efforts
 
@@ -19,16 +30,45 @@ The purpose of this test is to demonstrate your understanding of JavaScript web 
 ## Submission
 Please submit your test as an emailed zip file or link to a private repo or private file sharing system. You can also provide a hosted link or it can run locally.
 
-## Next Steps
-- Transition Maps to Mapbox GL with vector tiles => https://blog.webkid.io/making-maps-with-react/
+## Tech
+- React
+- Enzyme/Jest
+- CSS
 
 ## Additional Features
+- Display heartRate, cadence, power, temperature, elevation, and speed
 - Averages
 - Totals
-- Potential Pages
+- Potential Additional Pages
+- Motivational Music (.....hint: click on the user image)
 
-## Features Used:
-- rc-slider (inefficient to have to input type=range elements and do some wacky css styling with absolute positioning)
+## Modules Used:
+- React Slider
+- Google Maps react
+- Victory Graphs
+
+## Next Steps
+- Transition Maps to Mapbox GL with vector tiles => https://blog.webkid.io/making-maps-with-react/
+- Put labels on Markers to show range
+- Submit PR to google-maps-react for fixes in node_module
+- Make Logo
+- Figure out how to speed up algorithm for "Best Effort"
+- Dropdown Calendar Component
+
+## Setup
+
+##### Clone repo
+  - ```git clone https://github.com/davidbecker6081/tempo-trainer.git```
+
+##### NPM install
+  - ```npm install```
+
+  - NOTE: Due to node_module google-maps-react having some issues, the map might be off, including range highlight, and styling issues
+
+##### NPM start
+  - ```npm start```
+
+##### Open in browser at localhost:3000
 
 ## Available Scripts
 

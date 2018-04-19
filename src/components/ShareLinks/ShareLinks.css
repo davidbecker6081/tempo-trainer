@@ -33,9 +33,9 @@
 }
 
 @media screen and (max-width: 1150px) {
-  .share-links-wrapper {
-    flex-direction: column;
-    height: 20vh;
+  .share-link {
+    height: 2.5rem;
+    width: 2.5rem;
   }
 }
 
