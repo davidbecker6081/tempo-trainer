@@ -104,7 +104,8 @@ export default GoogleApiWrapper({
 
 GoogleMap.propTypes = {
   dataHelper: PropTypes.shape({
-    data: PropTypes.shape({}),
+    originalData: PropTypes.shape({}),
+    minuteData: PropTypes.arrayOf(PropTypes.shape({})),
     channels: PropTypes.arrayOf(PropTypes.string),
     GPSCoords: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
