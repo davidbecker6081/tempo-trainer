@@ -54,6 +54,8 @@ Please submit your test as an emailed zip file or link to a private repo or priv
 - Make Logo
 - Figure out how to speed up algorithm for "Best Effort"
 - Dropdown Calendar Component
+- Refactor CSS with box-sizing: border box;
+- Research Time Series methods for dealing with large amounts of continuous data influx
 
 ## Setup
 
