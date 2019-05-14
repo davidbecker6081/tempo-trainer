@@ -83,22 +83,22 @@ export default class DataCleaner {
   calculateBestEffort(channelSet, time) {
     const chunkSize = time * 60;
     const bestEffort = this.createMockEffort(channelSet);
+    const sampleData = [...this.originalData.samples];
     let runningSum = 0;
     let runningAverage = 0;
 
-    for (let i = 0; i < this.originalData.samples.length - chunkSize; i++) {
-      runningSum += this.originalData.samples[i].values[channelSet] || 0;
+    for (let i = 0; i < sampleData.length; i++) {
+      runningSum += sampleData[i].values[channelSet] || 0;
 
       if (i > chunkSize) {
-        runningSum -= this.originalData.samples[i - chunkSize - 1].values[channelSet] || 0;
+        runningSum -= sampleData[i - chunkSize].values[channelSet] || 0;
+        runningAverage = runningSum / chunkSize;
       }
-
-      runningAverage = runningSum / chunkSize;
 
       if (runningAverage > bestEffort.average && i > chunkSize) {
         bestEffort.average = runningAverage;
-        bestEffort.range.low = this.originalData.samples[i - chunkSize].millisecondOffset;
-        bestEffort.range.high = this.originalData.samples[i].millisecondOffset;
+        bestEffort.range.low = sampleData[i - chunkSize].millisecondOffset;
+        bestEffort.range.high = sampleData[i].millisecondOffset;
       }
     }
     return bestEffort;
