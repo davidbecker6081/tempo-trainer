@@ -130,6 +130,8 @@ describe('DataCleaner', () => {
     describe('Power 1-min', () => {
       let bestEffort;
 
+      // use a sample data set to make sure best effort is correct
+
       beforeEach(() => {
         bestEffort = dataCleaner.calculateBestEffort('power', 1);
       });
