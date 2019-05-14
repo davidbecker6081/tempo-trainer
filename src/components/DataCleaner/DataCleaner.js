@@ -61,7 +61,7 @@ export default class DataCleaner {
     };
   }
 
-  calculateBestEffort(channelSet, time) {
+  calculateBestEffort_DEPRECATED(channelSet, time) {
     // "Best" is defined as highest continuous average for the given time period.
     // Using a chunked array
     const chunkSize = time * 60;
@@ -77,6 +77,30 @@ export default class DataCleaner {
       }
       return effort;
     }, mockEffort);
+    return bestEffort;
+  }
+
+  calculateBestEffort(channelSet, time) {
+    const chunkSize = time * 60;
+    const bestEffort = this.createMockEffort(channelSet);
+    let runningSum = 0;
+    let runningAverage = 0;
+
+    for (let i = 0; i < this.originalData.samples.length - chunkSize; i++) {
+      runningSum += this.originalData.samples[i].values[channelSet] || 0;
+
+      if (i > chunkSize) {
+        runningSum -= this.originalData.samples[i - chunkSize - 1].values[channelSet] || 0;
+      }
+
+      runningAverage = runningSum / chunkSize;
+
+      if (runningAverage > bestEffort.average && i > chunkSize) {
+        bestEffort.average = runningAverage;
+        bestEffort.range.low = this.originalData.samples[i - chunkSize].millisecondOffset;
+        bestEffort.range.high = this.originalData.samples[i].millisecondOffset;
+      }
+    }
     return bestEffort;
   }
 
@@ -138,9 +162,10 @@ export default class DataCleaner {
       const currentTime = this.convertMilliToMin(sample.millisecondOffset);
       const isCurrentInRange = currentTime >= range[0] && currentTime <= range[1];
       if (isCurrentInRange) {
-        const graphObj = { time: 0, [channelSet]: 0 };
-        graphObj.time = this.convertMilliToMin(sample.millisecondOffset);
-        graphObj[channelSet] = sample.values[channelSet] || 0;
+        const graphObj = {
+          time: this.convertMilliToMin(sample.millisecondOffset),
+          [channelSet]: sample.values[channelSet] || 0,
+        };
         filteredArray.push(graphObj);
       }
       return filteredArray;
